@@ -300,6 +300,29 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'flow-logs',
+    emoji: '\u{1F4E1}',
+    title: 'Network — VPC Flow Log Analysis',
+    commands: [
+      { title: 'zcat — View gzip log', desc: 'Read compressed flow log', diff: 'medium', code: 'zcat <file>.gz | head -<lines>' },
+      { title: 'zcat — Count all records', desc: 'Line count across all gzipped files', diff: 'medium', code: 'zcat <directory>/*.gz | wc -l' },
+      { title: 'zgrep — Search compressed', desc: 'Find IP across all gzipped logs', diff: 'medium', code: 'zgrep --no-filename <ip> <directory>/*.gz > <output>' },
+      { title: 'zgrep — Exclude port', desc: 'Filter out specific port from results', diff: 'hard', code: 'zgrep <ip> <directory>/*.gz | grep -v :<port>' },
+      { title: 'sort — By timestamp', desc: 'Sort flows by start time (col 15)', diff: 'hard', code: 'sort -nk <column> <file> | head -<lines>' },
+      { title: 'sort — By bytes', desc: 'Find largest flows by bytes (col 12)', diff: 'hard', code: 'sort -nk <column> <file> | tail -<lines>' },
+      { title: 'date — Convert epoch', desc: 'Convert Unix timestamp to human date', diff: 'easy', code: 'date -d @<timestamp>' },
+      { title: 'awk — Sum bytes by port', desc: 'Total bytes for specific port', diff: 'hard', code: 'awk \'$<col> == "<value>"\' {SUM=SUM+$<byte_col>} END{print "Total: " SUM}' },
+      { title: 'awk — Filter by field', desc: 'Extract lines where field matches', diff: 'hard', code: 'cat <file> | awk \'$<field> == "<value>"\'' },
+      { title: 'nfdump — Export netflow', desc: 'Convert PCAP to netflow format', diff: 'hard', code: 'nfpcapd -r <pcap> -w <output_dir>' },
+      { title: 'nfdump — Process export', desc: 'Read exported netflow data', diff: 'hard', code: 'nfdump -R <exported_dir> > <output>' },
+      { title: 'nfdump — Flow from IP', desc: 'Search netflow for specific address', diff: 'hard', code: 'cat <netflow_file> | grep <ip>' },
+      { title: 'nfdump — Exclude multiple ports', desc: 'Chain port exclusions', diff: 'hard', code: 'cat <file> | grep <ip> | grep -v :<port1> | grep -v :<port2>' },
+      { title: 'file — Identify format', desc: 'Check file type of flow log', diff: 'easy', code: 'file <file>' },
+      { title: 'wc — Line count', desc: 'Count records in flow log', diff: 'easy', code: 'wc -l <file>' },
+      { title: 'ls — List directory', desc: 'List flow log files', diff: 'easy', code: 'ls <directory>' },
+    ]
+  },
+  {
     id: 'forensics',
     emoji: '\u{1F52C}',
     title: 'Forensics',
