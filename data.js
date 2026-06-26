@@ -556,6 +556,18 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'hayabusa',
+    emoji: '\u{1F50D}',
+    title: 'Windows — Hayabusa (Event Log Forensics)',
+    commands: [
+      { title: 'hayabusa — Show help', desc: 'Display available command options', diff: 'easy', code: '.\\hayabusa.exe csv-timeline -h' },
+      { title: 'hayabusa — CSV timeline', desc: 'Run threat detection rules on EVTX directory', diff: 'hard', code: '.\\hayabusa.exe csv-timeline --directory <evtx_dir> -o <output>.csv --no-color' },
+      { title: 'hayabusa — View results', desc: 'Display CSV output in PowerShell', diff: 'medium', code: 'Get-Content .\\<output>.csv -Encoding UTF8' },
+      { title: 'hayabusa — Open in Timeline Explorer', desc: 'Analyze CSV with Timeline Explorer GUI', diff: 'medium', code: 'Open .csv in Timeline Explorer -> Group by Level, then Rule Title' },
+      { title: 'hayabusa — Sysmon rules', desc: 'Include Sysmon detection rules', diff: 'hard', code: 'Include sysmon rules? (3,685 rules) -> yes' },
+    ]
+  },
+  {
     id: 'forensics',
     emoji: '\u{1F52C}',
     title: 'Forensics',
