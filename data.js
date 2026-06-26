@@ -532,6 +532,30 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'procmon',
+    emoji: '\u{1F4FA}',
+    title: 'Windows — Procmon (Process Monitor)',
+    commands: [
+      { title: 'procmon — Toggle capture', desc: 'Start/stop event capture', diff: 'medium', code: 'Ctrl+E' },
+      { title: 'procmon — Clear events', desc: 'Remove all captured events', diff: 'medium', code: 'Ctrl+X' },
+      { title: 'procmon — Save log', desc: 'Export to PML or CSV', diff: 'medium', code: 'Ctrl+S' },
+      { title: 'procmon — Filter dialog', desc: 'Add include/exclude rules', diff: 'hard', code: 'Ctrl+L' },
+      { title: 'procmon — Highlight rules', desc: 'Color specific events by rule', diff: 'hard', code: 'Ctrl+H' },
+      { title: 'procmon — Process tree', desc: 'View parent-child process hierarchy', diff: 'medium', code: 'Ctrl+T' },
+      { title: 'procmon — Jump to event', desc: 'Navigate to specific PID or event', diff: 'medium', code: 'Ctrl+J' },
+      { title: 'procmon — Filter: CreateFile', desc: 'Track file create/open operations', diff: 'hard', code: 'Operation is CreateFile' },
+      { title: 'procmon — Filter: WriteFile', desc: 'Monitor file write operations', diff: 'hard', code: 'Operation is WriteFile' },
+      { title: 'procmon — Filter: RegSetValue', desc: 'Detect registry value modifications', diff: 'hard', code: 'Operation is RegSetValue' },
+      { title: 'procmon — Filter: Process Create', desc: 'Capture new process execution', diff: 'hard', code: 'Operation is Process Create' },
+      { title: 'procmon — Filter: Load Image', desc: 'Monitor DLL/image loading', diff: 'hard', code: 'Operation is Load Image' },
+      { title: 'procmon — Filter: TCP Connect', desc: 'Detect network connections', diff: 'hard', code: 'Operation is TCP Connect' },
+      { title: 'procmon — Filter by path', desc: 'Filter events by file path pattern', diff: 'hard', code: 'Path contains <value>' },
+      { title: 'procmon — Filter by result', desc: 'Filter by SUCCESS, DENIED, etc.', diff: 'hard', code: 'Result is <value>' },
+      { title: 'procmon — Filter by PID', desc: 'Isolate events for a process', diff: 'medium', code: 'PID is <pid>' },
+      { title: 'procmon — Filter by process', desc: 'Focus on specific executable', diff: 'medium', code: 'Process Name is <process_name>' },
+    ]
+  },
+  {
     id: 'forensics',
     emoji: '\u{1F52C}',
     title: 'Forensics',
