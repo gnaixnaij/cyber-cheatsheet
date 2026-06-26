@@ -479,6 +479,23 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'file-hash',
+    emoji: '\u{1F4CB}',
+    title: 'Windows — Get-FileHash',
+    commands: [
+      { title: 'Get-FileHash — Default (SHA256)', desc: 'Generate SHA256 hash of a file', diff: 'easy', code: 'Get-FileHash <file>' },
+      { title: 'Get-FileHash — Specify algorithm', desc: 'MD5, SHA1, SHA256, SHA384, SHA512', diff: 'easy', code: 'Get-FileHash <file> -Algorithm <algorithm>' },
+      { title: 'Get-FileHash — SHA256 explicit', desc: 'Explicitly request SHA256', diff: 'easy', code: 'Get-FileHash <file> -Algorithm SHA256' },
+      { title: 'Get-FileHash — Full path', desc: 'Hash file using absolute path', diff: 'easy', code: 'Get-FileHash "<path>"' },
+      { title: 'Get-FileHash — Store in variable', desc: 'Save hash result for later use', diff: 'medium', code: '$hash = Get-FileHash <file>' },
+      { title: 'Get-FileHash — Hash value only', desc: 'Return just the hash string', diff: 'medium', code: '(Get-FileHash <file>).Hash' },
+      { title: 'Get-FileHash — Compare two files', desc: 'Check if files are identical', diff: 'medium', code: 'Compare-Object (Get-FileHash <file1>) (Get-FileHash <file2>)' },
+      { title: 'Get-FileHash — Export to file', desc: 'Write hash output to text file', diff: 'medium', code: 'Get-FileHash <file> | Out-File <output>' },
+      { title: 'Get-FileHash — Hash multiple files', desc: 'Hash all matching files', diff: 'hard', code: 'Get-ChildItem *.<ext> | Get-FileHash' },
+      { title: 'Get-FileHash — Hash recursively', desc: 'Hash all files in directory tree', diff: 'hard', code: 'Get-ChildItem -Recurse | Get-FileHash' },
+    ]
+  },
+  {
     id: 'forensics',
     emoji: '\u{1F52C}',
     title: 'Forensics',
