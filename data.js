@@ -160,6 +160,7 @@ const SECTIONS = [
     title: 'Password — Legba (Multi-Protocol Brute Force)',
     commands: [
       { title: 'legba — HTTP login', desc: 'Brute-force HTTP login form', diff: 'medium', code: 'legba http -T <url> -U <user> -P <password_file>' },
+      { title: 'legba — Combos file', desc: 'Use user:pass combos file (-C)', diff: 'medium', code: 'legba http -T <url> -C <combos_file>' },
       { title: 'legba — HTTP POST form', desc: 'Custom POST form brute-force', diff: 'hard', code: 'legba http -T <url> --http-method POST --http-payload "Username={{USERNAME}}&Password={{PASSWORD}}" --http-success "status == 302" -U <user_file> -P <password_file>' },
       { title: 'legba — HTTP Basic Auth', desc: 'Brute-force HTTP Basic Auth', diff: 'medium', code: 'legba http-basic -T <target> -U <user> -P <password_file>' },
       { title: 'legba — SSH', desc: 'Brute-force SSH password', diff: 'medium', code: 'legba ssh -T <target> -U <user> -P <password_file>' },
