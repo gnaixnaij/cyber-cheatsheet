@@ -271,6 +271,29 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'responder',
+    emoji: '\u{1F4E1}',
+    title: 'Network — Responder (LLMNR/NBT-NS Poisoning)',
+    commands: [
+      { title: 'responder — Basic', desc: 'Start poisoning on interface', diff: 'hard', code: 'responder -I <interface>' },
+      { title: 'responder — Analyze mode', desc: 'Monitor without poisoning', diff: 'medium', code: 'responder -I <interface> -A' },
+      { title: 'responder — WPAD proxy', desc: 'Enable rogue WPAD proxy server', diff: 'hard', code: 'responder -I <interface> -w' },
+      { title: 'responder — Force WPAD auth', desc: 'Force WPAD authentication capture', diff: 'hard', code: 'responder -I <interface> -w -F' },
+      { title: 'responder — Disable SMB', desc: 'Turn off SMB server module', diff: 'medium', code: 'responder -I <interface> --disable-smb' },
+      { title: 'responder — Disable HTTP', desc: 'Turn off HTTP server module', diff: 'medium', code: 'responder -I <interface> --disable-http' },
+      { title: 'responder — Fingerprinting', desc: 'Enable OS/host fingerprinting', diff: 'hard', code: 'responder -I <interface> -f' },
+      { title: 'responder — Verbose', desc: 'Detailed runtime output', diff: 'medium', code: 'responder -I <interface> -v' },
+      { title: 'responder — Log directory', desc: 'Custom log path', diff: 'medium', code: 'responder -I <interface> -o <path>' },
+      { title: 'responder — All interfaces', desc: 'Listen on every interface', diff: 'hard', code: 'responder -I all' },
+      { title: 'responder — DHCP poison', desc: 'Enable DHCP poisoning', diff: 'hard', code: 'responder -I <interface> -d' },
+      { title: 'responder — Custom challenge', desc: 'Set custom NTLM challenge', diff: 'hard', code: 'responder -I <interface> --challenge <hex>' },
+      { title: 'responder — LM downgrade', desc: 'Force LM hash downgrade', diff: 'hard', code: 'responder -I <interface> --lm' },
+      { title: 'responder — Disable NBT-NS', desc: 'Disable NBT-NS poisoning', diff: 'medium', code: 'responder -I <interface> --disable-nbt' },
+      { title: 'responder — Disable mDNS', desc: 'Disable multicast DNS', diff: 'medium', code: 'responder -I <interface> --disable-mdns' },
+      { title: 'responder — Redirect domain', desc: 'Target specific domain', diff: 'hard', code: 'responder -I <interface> -r <domain>' },
+    ]
+  },
+  {
     id: 'msolspray',
     emoji: '\u{2601}\u{FE0F}',
     title: 'Cloud — MSOLSpray (M365 Password Spray)',
