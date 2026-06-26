@@ -169,12 +169,32 @@ const SECTIONS = [
       { title: 'hashcat — Runtime limit', desc: 'Max cracking time in seconds', diff: 'medium', code: 'hashcat -m <hash_type> -a 0 <hashes> <wordlist> --runtime=<seconds>' },
       { title: 'hashcat — Example hashes', desc: 'Show sample hashes for mode', diff: 'easy', code: 'hashcat -m <hash_type> --example-hashes' },
       { title: 'hashcat — Version', desc: 'Display version info', diff: 'easy', code: 'hashcat --version' },
-      { title: 'john — Unshadow', desc: 'Combine passwd + shadow for cracking', diff: null, code: [
-        'unshadow passwd shadow > hashes.txt',
-        'john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt',
-      ]},
-      { title: 'hydra — SSH brute force', desc: 'SSH password attack', diff: null, code: 'hydra -l <user> -P <wordlist> <target> ssh' },
-      { title: 'hydra — Web form', desc: 'POST login bruteforce', diff: 'hard', code: 'hydra -l <user> -P <wordlist> <target> http-post-form "/path:user=^USER^&pass=^PASS^:F=incorrect"' },
+    ]
+  },
+  {
+    id: 'cewl',
+    emoji: '\u{1F575}',
+    title: 'Password — CeWL (Custom Wordlist Generator)',
+    commands: [
+      { title: 'cewl — Basic crawl', desc: 'Generate wordlist from website', diff: 'easy', code: 'cewl <url>' },
+      { title: 'cewl — Save wordlist', desc: 'Write extracted words to file', diff: 'easy', code: 'cewl <url> -w <output>' },
+      { title: 'cewl — Crawl depth', desc: 'Set spider depth (default 2)', diff: 'medium', code: 'cewl <url> -d <depth>' },
+      { title: 'cewl — Min word length', desc: 'Set minimum word length', diff: 'easy', code: 'cewl <url> -m <length>' },
+      { title: 'cewl — Max word length', desc: 'Set maximum word length', diff: 'medium', code: 'cewl <url> -x <length>' },
+      { title: 'cewl — Include emails', desc: 'Extract email addresses', diff: 'medium', code: 'cewl <url> -e' },
+      { title: 'cewl — Save emails', desc: 'Write emails to separate file', diff: 'medium', code: 'cewl <url> -e --email_file <output>' },
+      { title: 'cewl — Word counts', desc: 'Show frequency of each word', diff: 'medium', code: 'cewl <url> -c' },
+      { title: 'cewl — Lowercase', desc: 'Convert all words to lowercase', diff: 'easy', code: 'cewl <url> --lowercase' },
+      { title: 'cewl — Include numbers', desc: 'Include words with numbers', diff: 'medium', code: 'cewl <url> --with-numbers' },
+      { title: 'cewl — Unique only', desc: 'Remove duplicate words', diff: 'easy', code: 'cewl <url> --uniq' },
+      { title: 'cewl — Extract metadata', desc: 'Parse PDF/Office document metadata', diff: 'hard', code: 'cewl <url> --meta' },
+      { title: 'cewl — Download files', desc: 'Download discovered documents', diff: 'hard', code: 'cewl <url> --download' },
+      { title: 'cewl — Follow external', desc: 'Crawl offsite links', diff: 'hard', code: 'cewl <url> -o' },
+      { title: 'cewl — Request delay', desc: 'Wait between requests', diff: 'medium', code: 'cewl <url> --delay <seconds>' },
+      { title: 'cewl — Verbose', desc: 'Detailed crawl output', diff: 'medium', code: 'cewl <url> -v' },
+      { title: 'cewl — Proxy', desc: 'Route through HTTP proxy', diff: 'hard', code: 'cewl <url> --proxy_host <ip> --proxy_port <port>' },
+      { title: 'cewl — Auth basic', desc: 'Authenticated crawl', diff: 'hard', code: 'cewl <url> --auth_type basic --auth_user <user> --auth_pass <pass>' },
+      { title: 'cewl — Custom UA', desc: 'Set custom User-Agent', diff: 'medium', code: 'cewl <url> -u "<ua>"' },
     ]
   },
   {
