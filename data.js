@@ -599,6 +599,24 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'blob-finder',
+    emoji: '\u{2601}\u{FE0F}',
+    title: 'Cloud — Azure Blob Finder',
+    commands: [
+      { title: 'blobfinder — Basic scan', desc: 'Find Azure blobs linked to domain', diff: 'easy', code: 'blobfinder -d <domain>' },
+      { title: 'blobfinder — Enumerate containers', desc: 'List public blob containers', diff: 'medium', code: 'blobfinder -s <storage_url>' },
+      { title: 'blobfinder — List files', desc: 'Show files in public containers', diff: 'medium', code: 'blobfinder -s <storage_url> -l' },
+      { title: 'blobfinder — Recursive', desc: 'Recursively enumerate blobs', diff: 'hard', code: 'blobfinder -s <storage_url> -r' },
+      { title: 'blobfinder — Save output', desc: 'Write results to file', diff: 'easy', code: 'blobfinder -d <domain> -o <output>' },
+      { title: 'blobfinder — Verbose', desc: 'Detailed enumeration output', diff: 'medium', code: 'blobfinder -d <domain> -v' },
+      { title: 'blobfinder — Wordlist', desc: 'Custom wordlist for discovery', diff: 'medium', code: 'blobfinder -d <domain> -w <wordlist>' },
+      { title: 'blobfinder — Specific container', desc: 'Enumerate files from named container', diff: 'hard', code: 'blobfinder -s <storage_url> -c <container>' },
+      { title: 'blobfinder — Check anonymous', desc: 'Verify anonymous access enabled', diff: 'medium', code: 'blobfinder -s <storage_url> --check' },
+      { title: 'blobfinder — JSON output', desc: 'Export results as JSON', diff: 'medium', code: 'blobfinder -d <domain> --json' },
+      { title: 'blobfinder — Help', desc: 'Show available options', diff: 'easy', code: 'blobfinder -h' },
+    ]
+  },
+  {
     id: 'forensics',
     emoji: '\u{1F52C}',
     title: 'Forensics',
