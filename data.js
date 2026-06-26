@@ -222,6 +222,55 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'john',
+    emoji: '\u{1F511}',
+    title: 'Password — John the Ripper',
+    commands: [
+      { title: 'john — Wordlist mode', desc: 'Crack hashes with wordlist', diff: 'medium', code: 'john --wordlist=<wordlist> <hashfile>' },
+      { title: 'john — Rules enabled', desc: 'Wordlist with mangling rules', diff: 'hard', code: 'john --rules --wordlist=<wordlist> <hashfile>' },
+      { title: 'john — Single crack', desc: 'Single crack mode (login-based)', diff: 'hard', code: 'john --single <hashfile>' },
+      { title: 'john — Incremental', desc: 'Brute-force all combos', diff: 'hard', code: 'john --incremental <hashfile>' },
+      { title: 'john — Incremental digits', desc: 'Numeric-only brute force', diff: 'hard', code: 'john --incremental=Digits <hashfile>' },
+      { title: 'john — Mask attack', desc: 'Custom pattern mask', diff: 'hard', code: 'john --mask=<mask> <hashfile>' },
+      { title: 'john — Show cracked', desc: 'Display cracked passwords', diff: 'easy', code: 'john --show <hashfile>' },
+      { title: 'john — Session save', desc: 'Name session for resume', diff: 'medium', code: 'john --session=<name> <hashfile>' },
+      { title: 'john — Restore session', desc: 'Resume saved session', diff: 'medium', code: 'john --restore=<name>' },
+      { title: 'john — Session status', desc: 'Check session progress', diff: 'medium', code: 'john --status=<name>' },
+      { title: 'john — Fork (parallel)', desc: 'Run N parallel processes', diff: 'hard', code: 'john --fork=<N> <hashfile>' },
+      { title: 'john — Format list', desc: 'List supported hash formats', diff: 'easy', code: 'john --list=formats' },
+      { title: 'john — Format search', desc: 'Find specific hash format', diff: 'medium', code: 'john --list=formats | grep -i <keyword>' },
+      { title: 'john — NTLM', desc: 'Crack Windows NTLM hash', diff: 'medium', code: 'john --format=NT --wordlist=<wordlist> <hashfile>' },
+      { title: 'john — LM', desc: 'Crack Windows LM hash', diff: 'medium', code: 'john --format=LM --wordlist=<wordlist> <hashfile>' },
+      { title: 'john — Linux crypt', desc: 'Crack Linux /etc/shadow', diff: 'hard', code: 'john --format=crypt --wordlist=<wordlist> <hashfile>' },
+      { title: 'john — unshadow', desc: 'Merge passwd + shadow for cracking', diff: 'hard', code: [
+        'unshadow <passwd> <shadow> > <output>',
+        'john --wordlist=<wordlist> <output>',
+      ]},
+      { title: 'john — zip2john', desc: 'Extract hash from encrypted ZIP', diff: 'hard', code: [
+        'zip2john <file>.zip > <hash_output>',
+        'john --wordlist=<wordlist> <hash_output>',
+        'unzip <file>.zip',
+      ]},
+      { title: 'john — rar2john', desc: 'Extract hash from encrypted RAR', diff: 'hard', code: [
+        'rar2john <file>.rar > <hash_output>',
+        'john --wordlist=<wordlist> <hash_output>',
+        'unrar x <file>.rar',
+      ]},
+      { title: 'john — ssh2john', desc: 'Crack SSH private key passphrase', diff: 'hard', code: [
+        'ssh2john.py <id_rsa> > <hash_output>',
+        'john --wordlist=<wordlist> <hash_output>',
+      ]},
+      { title: 'john — pdf2john', desc: 'Extract hash from encrypted PDF', diff: 'hard', code: [
+        'pdf2john <file>.pdf > <hash_output>',
+        'john --wordlist=<wordlist> <hash_output>',
+      ]},
+      { title: 'john — office2john', desc: 'Extract hash from encrypted Excel/Office', diff: 'hard', code: [
+        'office2john.py <file>.xlsx > <hash_output>',
+        'john --wordlist=<wordlist> <hash_output>',
+      ]},
+    ]
+  },
+  {
     id: 'msolspray',
     emoji: '\u{2601}\u{FE0F}',
     title: 'Cloud — MSOLSpray (M365 Password Spray)',
