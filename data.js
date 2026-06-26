@@ -568,6 +568,23 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'eyewitness',
+    emoji: '\u{1F4F7}',
+    title: 'Recon — EyeWitness (Web Screenshots)',
+    commands: [
+      { title: 'eyewitness — Scan URL list', desc: 'Screenshot all URLs from file', diff: 'easy', code: 'eyewitness -f <url_file> -d <output> --web' },
+      { title: 'eyewitness — Single target', desc: 'Screenshot one website', diff: 'easy', code: 'eyewitness --single <url> -d <output>' },
+      { title: 'eyewitness — From Nmap XML', desc: 'Screenshot targets from Nmap scan', diff: 'medium', code: 'eyewitness -x <nmap_xml> -d <output> --web' },
+      { title: 'eyewitness — Resume scan', desc: 'Continue interrupted session', diff: 'medium', code: 'eyewitness --resume <database>.db' },
+      { title: 'eyewitness — Faster threads', desc: 'Speed up with parallel threads', diff: 'medium', code: 'eyewitness -f <url_file> -d <output> --threads <count>' },
+      { title: 'eyewitness — Slow/stealth', desc: 'Add delay between requests', diff: 'medium', code: 'eyewitness -f <url_file> -d <output> --delay <seconds>' },
+      { title: 'eyewitness — Timeout', desc: 'Prevent hanging on slow sites', diff: 'medium', code: 'eyewitness -f <url_file> -d <output> --timeout <seconds>' },
+      { title: 'eyewitness — Use proxy', desc: 'Route through Burp/SOCKS proxy', diff: 'hard', code: 'eyewitness -f <url_file> -d <output> --proxy-ip <ip> --proxy-port <port> --proxy-type socks5' },
+      { title: 'eyewitness — Custom User-Agent', desc: 'Spoof browser identity', diff: 'medium', code: 'eyewitness -f <url_file> -d <output> --user-agent "<ua>"' },
+      { title: 'eyewitness — Non-interactive', desc: 'Run without prompts', diff: 'easy', code: 'eyewitness -f <url_file> -d <output> --no-prompt' },
+    ]
+  },
+  {
     id: 'forensics',
     emoji: '\u{1F52C}',
     title: 'Forensics',
