@@ -514,6 +514,24 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'regshot',
+    emoji: '\u{1F4F9}',
+    title: 'Windows — Regshot (Registry Diff)',
+    commands: [
+      { title: 'regshot — Snapshot 1 (GUI)', desc: 'Take baseline registry snapshot', diff: 'medium', code: 'Regshot -> "1st shot"' },
+      { title: 'regshot — Snapshot 2 (GUI)', desc: 'Take post-change snapshot', diff: 'medium', code: 'Regshot -> "2nd shot"' },
+      { title: 'regshot — Compare (GUI)', desc: 'Generate comparison report', diff: 'medium', code: 'Regshot -> "Compare"' },
+      { title: 'regshot — Export TXT', desc: 'Save diff report as plain text', diff: 'medium', code: 'Regshot -> "Save as..." -> TXT' },
+      { title: 'regshot — Export HTML', desc: 'Save diff report as HTML', diff: 'medium', code: 'Regshot -> "Save as..." -> HTML' },
+      { title: 'regshot — CLI snapshot 1', desc: 'Baseline via command line', diff: 'hard', code: 'regshot.exe /1' },
+      { title: 'regshot — CLI snapshot 2', desc: 'Second snapshot via CLI', diff: 'hard', code: 'regshot.exe /2' },
+      { title: 'regshot — CLI compare', desc: 'Generate diff from CLI', diff: 'hard', code: 'regshot.exe /compare' },
+      { title: 'regshot — Check Run keys', desc: 'Review auto-start registry entries', diff: 'medium', code: 'HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run' },
+      { title: 'regshot — Check Services', desc: 'Check for hidden service persistence', diff: 'hard', code: 'HKLM\\SYSTEM\\CurrentControlSet\\Services' },
+      { title: 'regshot — Check Winlogon', desc: 'Review login/restriction policy changes', diff: 'hard', code: 'HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon' },
+    ]
+  },
+  {
     id: 'forensics',
     emoji: '\u{1F52C}',
     title: 'Forensics',
