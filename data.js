@@ -199,6 +199,24 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'fireprox',
+    emoji: '\u{1F525}',
+    title: 'Cloud — FireProx (AWS API Gateway Proxy)',
+    commands: [
+      { title: 'fireprox — Create proxy', desc: 'Create API Gateway for target URL', diff: 'hard', code: 'python3 fire.py --url <target_url>' },
+      { title: 'fireprox — List proxies', desc: 'List all existing FireProx APIs', diff: 'medium', code: 'python3 fire.py --list' },
+      { title: 'fireprox — Delete proxy', desc: 'Delete specific proxy by ID', diff: 'hard', code: 'python3 fire.py --delete <api_id>' },
+      { title: 'fireprox — Destroy all', desc: 'Remove all FireProx-created APIs', diff: 'hard', code: 'python3 fire.py --destroy' },
+      { title: 'fireprox — Update URL', desc: 'Change backend target URL', diff: 'hard', code: 'python3 fire.py --update <api_id> --url <new_url>' },
+      { title: 'fireprox — Specific region', desc: 'Deploy proxy in selected AWS region', diff: 'hard', code: 'python3 fire.py --region <region> --url <target_url>' },
+      { title: 'fireprox — Specific method', desc: 'Enable GET/POST etc', diff: 'medium', code: 'python3 fire.py --url <target_url> --method <method>' },
+      { title: 'fireprox — Multiple methods', desc: 'Enable several HTTP methods', diff: 'medium', code: 'python3 fire.py --url <target_url> --method GET POST PUT' },
+      { title: 'fireprox — Curl through proxy', desc: 'Send request via FireProx endpoint', diff: 'easy', code: 'curl https://<api_id>.execute-api.<region>.amazonaws.com/fireprox/' },
+      { title: 'fireprox — Curl POST', desc: 'POST request through proxy', diff: 'medium', code: 'curl -X POST -d "<data>" https://<api_id>.execute-api.<region>.amazonaws.com/fireprox/<path>' },
+      { title: 'fireprox — M365 spray', desc: 'Mask IP during password spray', diff: 'hard', code: 'python3 fire.py --url https://login.microsoftonline.com' },
+    ]
+  },
+  {
     id: 'shells',
     emoji: '\u{1F41A}',
     title: 'Reverse Shells & Listeners',
