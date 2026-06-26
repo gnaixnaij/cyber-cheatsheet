@@ -323,6 +323,31 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'zeek-rita',
+    emoji: '\u{1F50E}',
+    title: 'Network — Zeek & RITA',
+    commands: [
+      { title: 'zeek — Generate logs from PCAP', desc: 'Create Zeek logs from packet capture', diff: 'hard', code: 'zeek -r <pcap>' },
+      { title: 'rita — Import Zeek logs', desc: 'Import logs into RITA database', diff: 'hard', code: 'rita import <zeek_log_dir> <database_name>' },
+      { title: 'rita — List databases', desc: 'Show all imported databases', diff: 'easy', code: 'rita list' },
+      { title: 'rita — Delete database', desc: 'Remove an imported database', diff: 'medium', code: 'rita delete <database_name>' },
+      { title: 'rita — Clean broken DBs', desc: 'Find and remove broken databases', diff: 'medium', code: 'rita clean' },
+      { title: 'rita — Show beacons', desc: 'Detect C2 beaconing behavior', diff: 'hard', code: 'rita show-beacons <database_name> -H' },
+      { title: 'rita — Show beacons (SNI)', desc: 'C2 detection via SNI analysis', diff: 'hard', code: 'rita show-beacons-sni <database_name> -H' },
+      { title: 'rita — Show beacons (proxy)', desc: 'C2 detection via proxy logs', diff: 'hard', code: 'rita show-beacons-proxy <database_name> -H' },
+      { title: 'rita — Show DNS tunnels', desc: 'Detect DNS covert channels', diff: 'hard', code: 'rita show-exploded-dns <database_name> -H' },
+      { title: 'rita — Show long connections', desc: 'Find unusually long connections', diff: 'hard', code: 'rita show-long-connections <database_name> -H' },
+      { title: 'rita — Show open connections', desc: 'Show connections still open', diff: 'medium', code: 'rita show-open-connections <database_name> -H' },
+      { title: 'rita — Show strobes', desc: 'Detect port scan strobes', diff: 'hard', code: 'rita show-strobes <database_name> -H' },
+      { title: 'rita — Show blacklisted hosts', desc: 'Print blacklisted hostnames', diff: 'medium', code: 'rita show-bl-hostnames <database_name> -H' },
+      { title: 'rita — Show blacklisted src IPs', desc: 'Blacklisted IPs that initiated connections', diff: 'medium', code: 'rita show-bl-source-ips <database_name> -H' },
+      { title: 'rita — Show blacklisted dst IPs', desc: 'Blacklisted IPs that received connections', diff: 'medium', code: 'rita show-bl-dest-ips <database_name> -H' },
+      { title: 'rita — Show user agents', desc: 'Print user-agent strings', diff: 'medium', code: 'rita show-useragents <database_name> -H' },
+      { title: 'rita — HTML report', desc: 'Generate full HTML analysis report', diff: 'hard', code: 'rita html-report <database_name>' },
+      { title: 'rita — Test config', desc: 'Validate RITA configuration file', diff: 'medium', code: 'rita test-config' },
+    ]
+  },
+  {
     id: 'forensics',
     emoji: '\u{1F52C}',
     title: 'Forensics',
