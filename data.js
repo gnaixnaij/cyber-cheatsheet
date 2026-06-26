@@ -294,6 +294,27 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'smbeagle',
+    emoji: '\u{1F4E1}',
+    title: 'Network — SMBeagle (SMB Enumeration)',
+    commands: [
+      { title: 'smbeagle — Subnet scan', desc: 'Scan subnet for SMB hosts', diff: 'medium', code: 'smbeagle <subnet>' },
+      { title: 'smbeagle — Single host', desc: 'Enumerate SMB on target', diff: 'easy', code: 'smbeagle <target>' },
+      { title: 'smbeagle — Specify port', desc: 'Target custom SMB port', diff: 'medium', code: 'smbeagle -p <port> <target>' },
+      { title: 'smbeagle — Verbose', desc: 'Detailed share/user/OS info', diff: 'medium', code: 'smbeagle -v <target>' },
+      { title: 'smbeagle — Aggressive', desc: 'Deep shares + permissions + sessions', diff: 'hard', code: 'smbeagle -a <target>' },
+      { title: 'smbeagle — Null session', desc: 'Check anonymous SMB access', diff: 'hard', code: 'smbeagle --null <target>' },
+      { title: 'smbeagle — Authenticated', desc: 'Scan with credentials', diff: 'hard', code: 'smbeagle -u <user> -p <pass> <target>' },
+      { title: 'smbeagle — Domain auth', desc: 'Authenticate against domain', diff: 'hard', code: 'smbeagle -d <domain> -u <user> -p <pass> <target>' },
+      { title: 'smbeagle — List shares', desc: 'Enumerate SMB shares only', diff: 'medium', code: 'smbeagle --shares <target>' },
+      { title: 'smbeagle — User enum', desc: 'Extract SMB/AD users', diff: 'hard', code: 'smbeagle --users <target>' },
+      { title: 'smbeagle — Save output', desc: 'Write results to file', diff: 'medium', code: 'smbeagle -o <output> <target>' },
+      { title: 'smbeagle — JSON output', desc: 'Machine-readable format', diff: 'medium', code: 'smbeagle --json <target>' },
+      { title: 'smbeagle — Stealth mode', desc: 'Delay between probes', diff: 'hard', code: 'smbeagle --delay <seconds> <target>' },
+      { title: 'smbeagle — SMB version', desc: 'Detect SMB1/2/3 support', diff: 'medium', code: 'smbeagle --smb-version <target>' },
+    ]
+  },
+  {
     id: 'msolspray',
     emoji: '\u{2601}\u{FE0F}',
     title: 'Cloud — MSOLSpray (M365 Password Spray)',
