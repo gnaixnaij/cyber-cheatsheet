@@ -496,6 +496,24 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'strings-cmd',
+    emoji: '\u{1F4DC}',
+    title: 'Forensics — strings',
+    commands: [
+      { title: 'strings — Basic extraction', desc: 'Extract printable ASCII strings', diff: 'easy', code: 'strings <file>' },
+      { title: 'strings — Min length', desc: 'Show strings of N chars or more', diff: 'easy', code: 'strings -n <length> <file>' },
+      { title: 'strings — Scan entire file', desc: 'Scan whole file (not just initialized data)', diff: 'medium', code: 'strings -a <file>' },
+      { title: 'strings — UTF-16 LE', desc: 'Extract little-endian Unicode strings', diff: 'medium', code: 'strings -e l <file>' },
+      { title: 'strings — UTF-16 BE', desc: 'Extract big-endian Unicode strings', diff: 'medium', code: 'strings -e b <file>' },
+      { title: 'strings — Display offsets', desc: 'Show hex offsets before each string', diff: 'medium', code: 'strings -t x <file>' },
+      { title: 'strings — Search keyword', desc: 'Extract then grep for pattern', diff: 'medium', code: 'strings <file> | grep <keyword>' },
+      { title: 'strings — Extract URLs', desc: 'Find embedded HTTP links', diff: 'hard', code: 'strings <file> | grep http' },
+      { title: 'strings — Extract IPs', desc: 'Find embedded IP addresses', diff: 'hard', code: 'strings <file> | grep -E \'([0-9]{1,3}\\.){3}[0-9]{1,3}\'' },
+      { title: 'strings — Recursive directory', desc: 'Run strings on all files in dir', diff: 'hard', code: 'find <dir> -type f -exec strings {} \\;' },
+      { title: 'strings — Save to file', desc: 'Write extracted strings to output', diff: 'easy', code: 'strings <file> > <output>' },
+    ]
+  },
+  {
     id: 'forensics',
     emoji: '\u{1F52C}',
     title: 'Forensics',
