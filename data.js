@@ -32,6 +32,13 @@ const SECTIONS = [
       { title: 'whois', desc: 'Domain registration info', diff: null, code: 'whois <domain>' },
       { title: 'dnsrecon', desc: 'DNS enumeration', diff: null, code: 'dnsrecon -d <domain>' },
       { title: 'dig — TXT records', desc: 'Check SPF, DKIM, DMARC', diff: null, code: 'dig <domain> TXT' },
+      { title: 'tls-scan — Single target', desc: 'Extract TLS cert metadata from IP', diff: 'medium', code: 'tls-scan -a <target> -p 443' },
+      { title: 'tls-scan — Save output', desc: 'Save certificate data to JSONL', diff: 'medium', code: 'tls-scan -a <target> -p 443 -o <output>' },
+      { title: 'tls-scan — From file', desc: 'Scan IPs from a list file', diff: 'medium', code: 'tls-scan -i <input_file> -o <output>' },
+      { title: 'tls-scan — Port range', desc: 'Scan multiple TLS ports', diff: 'hard', code: 'tls-scan -a <target> -p 443 8443 993' },
+      { title: 'tls-scan — CIDR range', desc: 'Scan entire subnet', diff: 'hard', code: 'tls-scan -a <subnet> -p 443 -o <output>' },
+      { title: 'tls-scan — Custom timeout', desc: 'Adjust socket timeout', diff: 'medium', code: 'tls-scan -a <target> -p 443 -t 5 -o <output>' },
+      { title: 'tls-scan — More workers', desc: 'Increase parallel threads', diff: 'medium', code: 'tls-scan -a <subnet> -p 443 -w 256 -o <output>' },
     ]
   },
   {
