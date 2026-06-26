@@ -7,13 +7,18 @@ function escapeHtml(text) {
 
 function highlightCode(code) {
   var h = escapeHtml(code);
-  h = h.replace(/(&lt;[\w.\-\s]+&gt;)/g, '<span class="var">$1</span>');
-  h = h.replace(/(--?[\w-]+)/g, '<span class="fl">$1</span>');
-  h = h.replace(/"([^"]*)"/g, '<span class="str">"$1"</span>');
-  h = h.replace(/(#.*$)/gm, '<span class="cm">$1</span>');
-  h = h.replace(/([|>&;]|&amp;&amp;|\|\|)/g, '<span class="p">$1</span>');
+  // Single-pass: match patterns in priority order so HTML entities don't get corrupted
+  var all = /(&lt;[\w.\-\s]+&gt;)|(--?[\w-]+)|"([^"]*)"|(#.*$)|\|/gm;
+  h = h.replace(all, function(m, var_, fl, strContent, cm) {
+    if (var_) return "<span class='var'>" + var_ + "</span>";
+    if (fl) return "<span class='fl'>" + fl + "</span>";
+    if (strContent !== undefined) return "<span class='str'>\"" + strContent + "\"</span>";
+    if (cm) return "<span class='cm'>" + cm + "</span>";
+    return "<span class='p'>" + m + "</span>"; // pipe operator
+  });
+  // Keyword highlighting (line-start, must be separate pass)
   h = h.replace(/^(\s*)([a-zA-Z][\w.-]*)/gm, function(m, sp, cmd) {
-    return sp + '<span class="kw">' + cmd + '</span>';
+    return sp + "<span class='kw'>" + cmd + "</span>";
   });
   return h;
 }
