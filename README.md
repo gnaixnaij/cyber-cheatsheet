@@ -1,6 +1,6 @@
 # Cyber Cheatsheet ⚡
 
-Curated collection of **120+** pentesting and cybersecurity commands across **13 sections** — built for CTFs, penetration tests, and security assessments.
+Curated collection of **800+** pentesting and cybersecurity commands across **43 sections** — built for CTFs, penetration tests, and security assessments.
 
 ## Live Site
 

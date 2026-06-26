@@ -165,6 +165,39 @@
       background: var(--accent-dim);
     }
 
+    .toc-wrap {
+      position: sticky; top: 58px; z-index: 99;
+      background: var(--bg);
+      padding: 8px 0 6px;
+      transition: background 0.3s;
+    }
+
+    .diff-filter {
+      position: relative; z-index: 1;
+      max-width: 1000px; margin: 0 auto;
+      padding: 0 24px 16px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .diff-filter button {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.78em;
+      padding: 5px 14px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .diff-filter button:hover { border-color: var(--accent); color: var(--accent); }
+    .diff-filter button.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+    .diff-filter .badge-easy, .diff-filter .badge-medium, .diff-filter .badge-hard {
+      font-size: 0.7em; margin-left: 4px; padding: 1px 5px;
+    }
+
     .search-bar {
       position: relative; z-index: 1;
       max-width: 400px; margin: 0 auto 24px;
@@ -409,7 +442,7 @@
 <nav>
   <div class="logo">⚡<span>cyber-cheatsheet</span></div>
   <div class="nav-actions">
-    <span class="badge">v2.0</span>
+    <span class="badge">v3.0</span>
     <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">🌙</button>
   </div>
 </nav>
@@ -418,12 +451,13 @@
   <h1>cybersecurity <span>tools</span> cheatsheet</h1>
   <p>Quick commands for pentesting, CTFs, and security assessments.</p>
   <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:18px">
-    <div><span style="font-weight:800;color:var(--accent);font-size:1.3em">120+</span><br><span style="font-size:0.75em;color:var(--text-muted)">Commands</span></div>
+    <div><span style="font-weight:800;color:var(--accent);font-size:1.3em">800+</span><br><span style="font-size:0.75em;color:var(--text-muted)">Commands</span></div>
     <div><span style="font-weight:800;color:var(--accent);font-size:1.3em">43</span><br><span style="font-size:0.75em;color:var(--text-muted)">Sections</span></div>
     <div><span style="font-weight:800;color:var(--accent);font-size:1.3em">Free</span><br><span style="font-size:0.75em;color:var(--text-muted)">Always</span></div>
   </div>
 </section>
 
+<div class="toc-wrap">
 <div class="toc" id="toc">
   <a href="#recon">Recon</a>
   <a href="#scanning">Scanning</a>
@@ -468,6 +502,14 @@
   <a href="#crypto">Crypto</a>
   <a href="#misc">Misc</a>
 </div>
+</div>
+
+<div class="diff-filter">
+  <button onclick="filterDifficulty('all')" class="active" id="diffAll">All</button>
+  <button onclick="filterDifficulty('easy')" id="diffEasy"><span class="badge-easy">easy</span></button>
+  <button onclick="filterDifficulty('medium')" id="diffMedium"><span class="badge-medium">medium</span></button>
+  <button onclick="filterDifficulty('hard')" id="diffHard"><span class="badge-hard">hard</span></button>
+</div>
 
 <div class="search-bar">
   <span class="search-icon">🔎</span>
@@ -487,7 +529,7 @@
 <button id="scrollTop" title="Scroll to top">↑</button>
 
 <footer>
-  <p>cyber-cheatsheet v2.0 &mdash; <a href="https://github.com/gnaixnaij/cyber-cheatsheet">GitHub</a> &mdash; Commands verified on Kali Linux. Use responsibly.</p>
+  <p>cyber-cheatsheet v3.0 &mdash; <a href="https://github.com/gnaixnaij/cyber-cheatsheet">GitHub</a> &mdash; Commands verified on Kali Linux. Use responsibly.</p>
 </footer>
 
 <script src="data.js"></script>
