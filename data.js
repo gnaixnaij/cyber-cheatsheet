@@ -585,6 +585,20 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'bucket-finder',
+    emoji: '\u{26F3}',
+    title: 'Cloud — S3 Bucket Finder',
+    commands: [
+      { title: 'bucket_finder — Single bucket', desc: 'Check if bucket exists and is public', diff: 'easy', code: 'bucket_finder.py -b <bucket>' },
+      { title: 'bucket_finder — Scan list', desc: 'Test multiple bucket names from file', diff: 'easy', code: 'bucket_finder.py -l <bucket_file>' },
+      { title: 'bucket_finder — Verbose', desc: 'Show detailed HTTP responses', diff: 'medium', code: 'bucket_finder.py -b <bucket> -v' },
+      { title: 'bucket_finder — Wordlist enum', desc: 'Enumerate buckets from wordlist', diff: 'medium', code: 'bucket_finder.py -w <wordlist>' },
+      { title: 'bucket_finder — Region', desc: 'Check bucket in specific AWS region', diff: 'medium', code: 'bucket_finder.py -b <bucket> --region <region>' },
+      { title: 'bucket_finder — Save results', desc: 'Write scan results to file', diff: 'easy', code: 'bucket_finder.py -l <bucket_file> -o <output>' },
+      { title: 'bucket_finder — Concurrent', desc: 'Multi-threaded scanning', diff: 'medium', code: 'bucket_finder.py -l <bucket_file> -t <threads>' },
+    ]
+  },
+  {
     id: 'forensics',
     emoji: '\u{1F52C}',
     title: 'Forensics',
