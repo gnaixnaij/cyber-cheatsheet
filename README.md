@@ -8,21 +8,20 @@ https://gnaixnaij.github.io/cyber-cheatsheet/
 
 ## Sections
 
-| # | Section | Tools |
-|---|---------|-------|
-| 1 | Reconnaissance | nmap, whois, dnsrecon, dig |
-| 2 | Scanning & Enumeration | gobuster, ffuf, nikto, wpscan, whatweb |
-| 3 | Web Exploitation | sqlmap, curl |
-| 4 | Exploitation Frameworks | msfconsole, msfvenom, searchsploit |
-| 5 | Password Cracking | hashcat, john, hydra |
-| 6 | Reverse Shells & Listeners | netcat, bash, python, php, socat |
-| 7 | Lateral Movement | impacket, evil-winrm, smbclient, ssh |
-| 8 | **OSINT** | theHarvester, sherlock, shodan, waybackurls, holehe |
-| 9 | **Forensics** | volatility, autopsy, foremost, bulk_extractor, exiftool |
-| 10 | **Cloud & AD** | aws, s3scanner, BloodHound, kerbrute, impacket |
-| 11 | **Privilege Escalation** | sudo, find, linpeas, winpeas, accesschk |
-| 12 | Cryptography & Encoding | openssl, base64, xxd |
-| 13 | Misc Utilities | steghide, binwalk, strings |
+| Area | Sections |
+|------|----------|
+| **Recon** | Reconnaissance, Scanning & Enumeration, EyeWitness |
+| **Web** | Web Exploitation, Command Injection, XSS, SQLi Ref, API Attacks, Burp Suite |
+| **Exploitation** | Exploitation Frameworks, Reverse Shells & Listeners |
+| **Password** | Password Cracking, CeWL, Legba, John the Ripper |
+| **Lateral** | Lateral Movement, Responder, SMBeagle |
+| **Post-Exploit** | Mimikatz, Windows Live Investigation, Windows ADS |
+| **Cloud** | MSOLSpray, FireProx, S3 Bucket Finder, Azure Blob Finder, Cloud & AD |
+| **Forensics** | Forensics, GDB, Get-FileHash, strings, Regshot, Procmon, Hayabusa |
+| **Network** | VPC Flow Logs, Zeek & RITA, tcpdump, Wireshark Filters |
+| **OSINT** | OSINT |
+| **Other** | Privilege Escalation, Cryptography, Misc, DNS Ref, seq |
+| **Total** | **43 sections, 800+ commands** |
 
 ## Features
 
