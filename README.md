@@ -1,5 +1,7 @@
 # Cyber Cheatsheet ⚡
 
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Lint](https://img.shields.io/github/actions/workflow/status/gnaixnaij/cyber-cheatsheet/lint.yml?branch=main&label=lint&logo=github)](https://github.com/gnaixnaij/cyber-cheatsheet/actions)
 [![ko-fi](https://img.shields.io/badge/Ko--fi-Buy%20me%20a%20coffee-FF5E5B?style=flat-square&logo=ko-fi&logoColor=white)](https://ko-fi.com/gnaixnaij)
 
 Curated collection of **800+** pentesting and cybersecurity commands across **43 sections** — built for CTFs, penetration tests, and security assessments.
