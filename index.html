@@ -123,6 +123,12 @@
       color: var(--accent);
       background: var(--accent-dim);
     }
+    .buy-btn {
+      padding: 5px 14px; border-radius: 6px; font-size: 0.78em; font-weight: 600;
+      background: var(--accent); color: #fff; border: 1px solid var(--accent);
+      text-decoration: none; transition: all 0.2s; white-space: nowrap;
+    }
+    .buy-btn:hover { background: #4090e0; border-color: #4090e0; text-decoration: none; }
     .nav-actions {
       display: flex;
       align-items: center;
@@ -468,6 +474,7 @@
   <div class="nav-actions">
     <span class="badge">v3.0</span>
     <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">🌙</button>
+    <a href="https://gumroad.com/l/cyber-cheatsheet" class="buy-btn" target="_blank">📥 PDF</a>
   </div>
 </nav>
 
