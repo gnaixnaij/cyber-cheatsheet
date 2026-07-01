@@ -50,6 +50,10 @@ function renderSections() {
       html += '</div>';
       html += '<div class="cmd-body" style="display:none">';
       html += '<pre>' + lines + '<button class="copy-btn" onclick="copyCmd(this)">copy</button></pre>';
+      if (cmd.output) {
+        html += '<div class="cmd-output" style="display:none"><div class="output-label">Example output</div><pre class="output-pre">' + escapeHtml(cmd.output) + '</pre></div>';
+        html += '<button class="run-btn" onclick="toggleOutput(this)">▶ Run</button>';
+      }
       html += '</div>';
       html += '</div>';
     });
@@ -65,6 +69,20 @@ function toggleCmd(header) {
   var expanded = body.style.display !== 'none';
   body.style.display = expanded ? 'none' : '';
   icon.textContent = expanded ? '\u25B6' : '\u25BC';
+}
+
+function toggleOutput(btn) {
+  var output = btn.parentElement.querySelector('.cmd-output');
+  if (!output) return;
+  var expanded = output.style.display !== 'none';
+  output.style.display = expanded ? 'none' : '';
+  btn.textContent = expanded ? '▶ Run' : '▼ Hide output';
+}
+
+function escapeHtml(text) {
+  var d = document.createElement('div');
+  d.textContent = text;
+  return d.innerHTML;
 }
 
 function toggleSection(header) {
@@ -118,8 +136,9 @@ function filterCommands() {
     cmds.forEach(function(cmd) {
       var title = (cmd.querySelector('.cmd-title')?.textContent || '').toLowerCase();
       var desc = (cmd.querySelector('.cmd-desc')?.textContent || '').toLowerCase();
-      var code = (cmd.querySelector('pre')?.textContent || '').toLowerCase().replace('copy', '');
-      var match = !q || title.indexOf(q) !== -1 || desc.indexOf(q) !== -1 || code.indexOf(q) !== -1;
+      var code = (cmd.querySelector('.cmd-body pre')?.textContent || '').toLowerCase().replace('copy', '');
+      var output = (cmd.querySelector('.output-pre')?.textContent || '').toLowerCase();
+      var match = !q || title.indexOf(q) !== -1 || desc.indexOf(q) !== -1 || code.indexOf(q) !== -1 || output.indexOf(q) !== -1;
       cmd.style.display = match ? '' : 'none';
       if (match) cardHasMatch = true;
     });

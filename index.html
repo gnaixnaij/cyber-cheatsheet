@@ -376,6 +376,22 @@
     .cmd-body pre .cm { color: var(--text-muted); font-style: italic; }
     .cmd-body pre .var { color: #60a5fa; }
     .cmd-body pre .p { color: var(--text-muted); }
+    .run-btn {
+      display: inline-block; margin-top: 6px; margin-right: 4px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--accent); padding: 3px 10px; border-radius: 5px;
+      font-size: 0.75em; cursor: pointer; font-family: inherit;
+      transition: all 0.2s;
+    }
+    .run-btn:hover { background: var(--accent-dim); border-color: var(--accent); }
+    .cmd-output { margin-top: 8px; }
+    .output-label { font-size: 0.72em; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .output-pre {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78em;
+      background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+      border-radius: 6px; padding: 10px 12px; overflow-x: auto;
+      color: #a1a1aa; line-height: 1.5;
+    }
 
     .copy-btn {
       position: absolute;
